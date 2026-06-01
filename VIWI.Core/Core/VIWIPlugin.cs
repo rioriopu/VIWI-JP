@@ -4,6 +4,7 @@ using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
 using ECommons;
 using ECommons.Configuration;
+using VIWI.Localization;
 using VIWI.UI.Windows;
 
 namespace VIWI.Core;
@@ -90,6 +91,9 @@ public sealed class VIWIPlugin : IDalamudPlugin
 
         ECommonsMain.Init(pluginInterface, this, [Module.DalamudReflector]);
         PluginLog.Information("Core + ECommons initialized.");
+
+        // [VIWI-JP] 翻訳辞書をロード（Localization/ja.json）。未配置/未登録キーは原文がそのまま使われる。
+        L.Load();
 
         DashboardWindow = new MainDashboardWindow(config);
         VIWIContext.DashboardWindow = DashboardWindow;

@@ -27,8 +27,23 @@ internal sealed class GameStrings
             ?? throw new ConstraintException($"Unable to resolve {nameof(RetrieveFinishedItem)}");
         DiscontinueItem = dataManager.GetRegex<WorkshopDialogue>("TEXT_CMNDEFCOMPANYMANUFACTORY_00150_SUBMENU_CC_BREAK_ALL_CONF", pluginLog)
             ?? throw new ConstraintException($"Unable to resolve {nameof(DiscontinueItem)}");
-        WorkshopMenuExit = dataManager.GetString<WorkshopDialogue>("TEXT_CMNDEFCOMPANYMANUFACTORY_00150_MENU_EXIT", pluginLog) 
+        WorkshopMenuExit = dataManager.GetString<WorkshopDialogue>("TEXT_CMNDEFCOMPANYMANUFACTORY_00150_MENU_EXIT", pluginLog)
             ?? throw new ConstraintException($"Unable to resolve {nameof(WorkshopMenuExit)}");
+
+        // ─── [VIWI-JP] FC工房メニュー選択肢の言語非依存照合用 ────────────────
+        // 本家は WorkshoppaModule.Craft.cs / CraftingLog.cs で英語文字列を直接照合しており
+        // 非ENクライアントでは選択肢を選べず自動化が停止する。ここで該当する選択肢文言を
+        // WorkshopDialogue シートから現クライアント言語で取得する Regex として保持する。
+        ContributeMaterialsMenu = dataManager.GetRegex<WorkshopDialogue>("TEXT_CMNDEFCOMPANYMANUFACTORY_00150_MENU_CC_SUPPLY", pluginLog)
+            ?? throw new ConstraintException($"Unable to resolve {nameof(ContributeMaterialsMenu)}");
+        DiscontinueProjectMenu = dataManager.GetRegex<WorkshopDialogue>("TEXT_CMNDEFCOMPANYMANUFACTORY_00150_MENU_CC_BREAK", pluginLog)
+            ?? throw new ConstraintException($"Unable to resolve {nameof(DiscontinueProjectMenu)}");
+        CollectFinishedProductMenu = dataManager.GetRegex<WorkshopDialogue>("TEXT_CMNDEFCOMPANYMANUFACTORY_00150_MENU_CC_GET_ITEM", pluginLog)
+            ?? throw new ConstraintException($"Unable to resolve {nameof(CollectFinishedProductMenu)}");
+        AdvanceProductionMenu = dataManager.GetRegex<WorkshopDialogue>("TEXT_CMNDEFCOMPANYMANUFACTORY_00150_MENU_CC_PROGRESS", pluginLog)
+            ?? throw new ConstraintException($"Unable to resolve {nameof(AdvanceProductionMenu)}");
+        CompleteConstructionMenu = dataManager.GetRegex<WorkshopDialogue>("TEXT_CMNDEFCOMPANYMANUFACTORY_00150_MENU_CC_LAST_PROGRESS", pluginLog)
+            ?? throw new ConstraintException($"Unable to resolve {nameof(CompleteConstructionMenu)}");
     }
 
     public Regex PurchaseItemForGil { get; }
@@ -39,6 +54,13 @@ internal sealed class GameStrings
     public Regex RetrieveFinishedItem { get; }
     public Regex DiscontinueItem { get; }
     public string WorkshopMenuExit { get; }
+
+    // [VIWI-JP] FC工房メニュー選択肢（言語非依存照合用）
+    public Regex ContributeMaterialsMenu { get; }
+    public Regex DiscontinueProjectMenu { get; }
+    public Regex CollectFinishedProductMenu { get; }
+    public Regex AdvanceProductionMenu { get; }
+    public Regex CompleteConstructionMenu { get; }
 
     [Sheet("custom/001/CmnDefCompanyManufactory_00150")]
     [SuppressMessage("Performance", "CA1812")]

@@ -55,7 +55,7 @@ internal sealed partial class WorkshoppaModule
             CurrentStage = Stage.SelectCraftCategory;
         else if (_configuration.Mode == TurnInMode.Leveling
             && AnyLevelingTargetsEnabled()
-            && SelectSelectString("Discontinue", 2, s => s.StartsWith("Discontinue project.", StringComparison.Ordinal)))
+            && SelectSelectString("Discontinue", 2, s => _gameStrings.DiscontinueProjectMenu.IsMatch(s)))
         {
             CurrentStage = Stage.DiscontinueProject;
             _continueAt = DateTime.Now.AddSeconds(0.4);
@@ -166,7 +166,10 @@ internal sealed partial class WorkshoppaModule
 
     private void ConfirmCraft()
     {
-        if (SelectSelectYesno(0, s => s.StartsWith("Craft ", StringComparison.Ordinal)))
+        // [VIWI-JP] 製作開始の Yesno は ConfirmCraft ステージでしか想定されないため、
+        // 旧版の英語プレフィックス照合（"Craft "）に依存せず、空文字でない Yesno を確定する。
+        // EN: "Craft N <item>?" / JP: 「<item> を N 個製作しますか？」など、言語ごとに表現が異なる。
+        if (SelectSelectYesno(0, s => !string.IsNullOrEmpty(s)))
         {
             _configuration.CurrentlyCraftedItem!.StartedCrafting = true;
             SaveConfig();

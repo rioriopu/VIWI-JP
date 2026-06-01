@@ -131,7 +131,7 @@ internal sealed partial class WorkshoppaModule
         }
         else
         {
-            if (_configuration.Mode == TurnInMode.Leveling && ShouldTerminateLevelingProject() && SelectSelectString("Discontinue", 2, s => s.StartsWith("Discontinue project.", StringComparison.Ordinal)))
+            if (_configuration.Mode == TurnInMode.Leveling && ShouldTerminateLevelingProject() && SelectSelectString("Discontinue", 2, s => _gameStrings.DiscontinueProjectMenu.IsMatch(s)))
             {
                 CurrentStage = Stage.DiscontinueProject;
                 _continueAt = DateTime.Now.AddSeconds(0.25);
@@ -139,23 +139,23 @@ internal sealed partial class WorkshoppaModule
             else if (_configuration.Mode == TurnInMode.Leveling
                 && AnyLevelingTargetsEnabled()
                 && ShouldDiscontinueLevelingProject()
-                && SelectSelectString("Discontinue", 2, s => s.StartsWith("Discontinue project.", StringComparison.Ordinal)))
+                && SelectSelectString("Discontinue", 2, s => _gameStrings.DiscontinueProjectMenu.IsMatch(s)))
             {
                 CurrentStage = Stage.DiscontinueProject;
                 _continueAt = DateTime.Now.AddSeconds(0.25);
             }
-            else if (_mergePending && SelectSelectString("Nothing", 3, s => s == "Nothing."))
+            else if (_mergePending && SelectSelectString("Nothing", 3, s => s == _gameStrings.WorkshopMenuExit))
             {
                 PluginLog.Information("Merge Requested, Exiting menu.");
                 CurrentStage = Stage.MergeStacks;
                 _continueAt = DateTime.Now.AddSeconds(0.25);
             }
-            else if (SelectSelectString("contrib", 0, s => s.StartsWith("Contribute materials.", StringComparison.Ordinal)))
+            else if (SelectSelectString("contrib", 0, s => _gameStrings.ContributeMaterialsMenu.IsMatch(s)))
             {
                 CurrentStage = Stage.ContributeMaterials;
                 _continueAt = DateTime.Now.AddSeconds(0.5);
             }
-            else if (SelectSelectString("advance", 0, s => s.StartsWith("Advance to the next phase of production.", StringComparison.Ordinal)))
+            else if (SelectSelectString("advance", 0, s => _gameStrings.AdvanceProductionMenu.IsMatch(s)))
             {
                 PluginLog.Information("Phase is complete");
 
@@ -166,25 +166,25 @@ internal sealed partial class WorkshoppaModule
                 CurrentStage = Stage.TargetFabricationStation;
                 _continueAt = DateTime.Now.AddSeconds(1.5);
             }
-            else if (SelectSelectString("complete", 0, s => s.StartsWith("Complete the construction of", StringComparison.Ordinal)))
+            else if (SelectSelectString("complete", 0, s => _gameStrings.CompleteConstructionMenu.IsMatch(s)))
             {
                 PluginLog.Information("Item is almost complete, confirming last cutscene");
                 CurrentStage = Stage.TargetFabricationStation;
                 _continueAt = DateTime.Now.AddSeconds(1.5);
             }
-            else if (SelectSelectString("collect", 0, s => s == "Collect finished product."))
+            else if (SelectSelectString("collect", 0, s => _gameStrings.CollectFinishedProductMenu.IsMatch(s)))
             {
                 PluginLog.Information("Item is complete");
                 CurrentStage = Stage.ConfirmCollectProduct;
                 _continueAt = DateTime.Now.AddSeconds(0.25);
             }
-            else if (_configuration.Mode == TurnInMode.Leveling && SelectSelectString("Nothing", 1, s => s == "Nothing." && !AllLevelingMaterialsExhausted()))
+            else if (_configuration.Mode == TurnInMode.Leveling && SelectSelectString("Nothing", 1, s => s == _gameStrings.WorkshopMenuExit && !AllLevelingMaterialsExhausted()))
             {
                 PluginLog.Information("No Project Available, Materials not yet Exhausted, Restarting,");
                 CurrentStage = Stage.TakeItemFromQueue;
                 _continueAt = DateTime.Now.AddSeconds(0.2);
             }
-            else if (_configuration.Mode == TurnInMode.Leveling && SelectSelectString("Nothing", 1, s => s == "Nothing." && AllLevelingMaterialsExhausted()))
+            else if (_configuration.Mode == TurnInMode.Leveling && SelectSelectString("Nothing", 1, s => s == _gameStrings.WorkshopMenuExit && AllLevelingMaterialsExhausted()))
             {
                 PluginLog.Information("No Project or Materials Available, Stopping Leveling,");
                 CurrentStage = Stage.RequestStop;

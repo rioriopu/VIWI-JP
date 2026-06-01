@@ -1,0 +1,12 @@
+{
+  "Name": "Vera's Integrated World Improvements (JP)",
+  "Author": "VeraNala (forked by Estell)",
+  "InternalName": "VIWIJP",
+  "DalamudApiLevel": "15",
+  "MinimumDalamudVersion": "15.0.0",
+  "Punchline": "Vera's Integrated World Improvements — 日本語クライアント対応フォーク",
+  "Description": "VeraNala/VIWI を日本語クライアントで動作するように改修したフォーク版です。本家の機能（AutoLogin / Workshoppa / KitchenSink 等）は維持しつつ、英語固定文字列に依存していた箇所をゲームデータシートから現クライアント言語で取得するよう変更しています。日本語化は別ファイル（Localization/ja.json）で管理し、上流マージへの追従性を確保しています。",
+  "Tags": [ "VIWI", "viwi", "Vera", "Workshoppa", "Deliveroo", "AutoLogin", "Login", "AoE", "JP", "Japanese" ],
+  "RepoUrl": "https://github.com/rioriopu/VIWI-JP",
+  "IconUrl": "https://raw.githubusercontent.com/rioriopu/VIWI-JP/jp/VIWI.Core/VIWI.png"
+}
