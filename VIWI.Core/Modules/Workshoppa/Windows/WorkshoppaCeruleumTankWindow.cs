@@ -101,8 +101,8 @@ internal sealed unsafe class WorkshoppaCeruleumTankWindow : WorkshoppaShopWindow
 
         ImGui.Text("Inventory".T());
         ImGui.Indent();
-        ImGui.Text($"Ceruleum Tanks: {FormatStackCount(ceruleumTanks)}");
-        ImGui.Text($"Free Slots: {freeInventorySlots}");
+        ImGui.Text("Ceruleum Tanks: {0}".Tr(FormatStackCount(ceruleumTanks)));
+        ImGui.Text("Free Slots: {0}".Tr(freeInventorySlots));
         ImGui.Unindent();
 
         ImGui.Separator();
@@ -126,7 +126,7 @@ internal sealed unsafe class WorkshoppaCeruleumTankWindow : WorkshoppaShopWindow
             Shop.HandleNextPurchaseStep();
             if (Shop.PurchaseState != null)
             {
-                ImGui.Text($"Buying {FormatStackCount(Shop.PurchaseState.ItemsLeftToBuy)}...");
+                ImGui.Text("Buying {0}...".Tr(FormatStackCount(Shop.PurchaseState.ItemsLeftToBuy)));
                 if (ImGuiComponents.IconButtonWithText(FontAwesomeIcon.Times, "Cancel Auto-Buy"))
                     Shop.CancelAutoPurchase();
             }
@@ -230,7 +230,7 @@ internal sealed unsafe class WorkshoppaCeruleumTankWindow : WorkshoppaShopWindow
             return;
         }
 
-        _chatGui.Print($"Starting purchase of {FormatStackCount(quantity)} ceruleum tanks.");
+        _chatGui.Print("Starting purchase of {0} ceruleum tanks.".Tr(FormatStackCount(quantity)));
         Shop.StartAutoPurchase(quantity);
         Shop.HandleNextPurchaseStep();
     }

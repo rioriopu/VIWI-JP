@@ -28,7 +28,7 @@ namespace VIWI.UI.Pages
             // Header
             // ---------------------------
             ImGui.TextUnformatted("VIWI – Vera's Integrated World Improvements".T());
-            ImGui.TextUnformatted($"VIWI Version: {VIWIContext.PluginInterface.Manifest.AssemblyVersion}");
+            ImGui.TextUnformatted("VIWI Version: {0}".Tr(VIWIContext.PluginInterface.Manifest.AssemblyVersion));
             ImGuiHelpers.ScaledDummy(4f);
             ImGui.Separator();
             ImGuiHelpers.ScaledDummy(8f);
@@ -53,7 +53,7 @@ namespace VIWI.UI.Pages
                 ImGui.BulletText($"Current World: {localPlayer.CurrentWorld.Value.Name}");
                 ImGui.BulletText($"Job: ({job.RowId}) \"{job.Abbreviation}\"  Level: {playerState.GetClassJobLevel(job)}");
                 ImGui.BulletText($"Exp in level: {playerState.GetClassJobExperience(job):N0}");
-                //ImGui.TextUnformatted($"EXP needed to reach {targetLevel}: {expRemaining:N0}");
+                //ImGui.TextUnformatted("EXP needed to reach {0}: {1:N0}".Tr(targetLevel, expRemaining));
 
                 var territoryId = VIWIContext.ClientState.TerritoryType;
                 if (VIWIContext.DataManager.GetExcelSheet<TerritoryType>()

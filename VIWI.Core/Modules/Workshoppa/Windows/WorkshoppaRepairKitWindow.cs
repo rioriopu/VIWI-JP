@@ -107,8 +107,8 @@ internal sealed unsafe class WorkshoppaRepairKitWindow : WorkshoppaShopWindowBas
 
         ImGui.Text("Inventory".T());
         ImGui.Indent();
-        ImGui.Text($"Dark Matter Clusters: {darkMatterClusters:N0}");
-        ImGui.Text($"Grade 6 Dark Matter: {item.OwnedItems:N0}");
+        ImGui.Text("Dark Matter Clusters: {0:N0}".Tr(darkMatterClusters));
+        ImGui.Text("Grade 6 Dark Matter: {0:N0}".Tr(item.OwnedItems));
         ImGui.Unindent();
 
         int missingItems = Math.Max(0, darkMatterClusters * 5 - (int)item.OwnedItems);

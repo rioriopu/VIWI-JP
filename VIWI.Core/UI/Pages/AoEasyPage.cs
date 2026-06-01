@@ -35,7 +35,7 @@ namespace VIWI.UI.Pages
                 return;
             }
             ImGuiHelpers.ScaledDummy(4f);
-            ImGui.TextUnformatted($"AoEasy - V{Version}");
+            ImGui.TextUnformatted("AoEasy - V{0}".Tr(Version));
             ImGui.SameLine();
             ImGui.TextColored(GradientColor.Get(ImGuiHelper.RainbowColorStart, ImGuiHelper.RainbowColorEnd, 500), "Stop Running Away From Me!");
             ImGui.TextUnformatted("Enabled:".T());

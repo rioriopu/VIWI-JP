@@ -109,7 +109,7 @@ internal sealed class WorkshoppaWindow : Window
                 ImGui.SetCursorPosY(ImGui.GetCursorPosY() + (ImGui.GetFrameHeight() - ImGui.GetTextLineHeight()) / 2);
             }
 
-            ImGui.TextUnformatted($"{currentCraft.Name}");
+            ImGui.TextUnformatted("{0}".Tr(currentCraft.Name));
             ImGui.Spacing();
 
             if (_module.CurrentStage == Stage.Stopped)
@@ -331,7 +331,7 @@ internal sealed class WorkshoppaWindow : Window
             ImGui.EndDisabled();
         }
         ImGui.Separator();
-        ImGui.Text($"Debug (Stage): {_module.CurrentStage}");
+        ImGui.Text("Debug (Stage): {0}".Tr(_module.CurrentStage));
     }
 
     private void Save()
@@ -384,7 +384,7 @@ internal sealed class WorkshoppaWindow : Window
                     }
 
                     Save();
-                    _chatGui.Print($"Imported {preset.ItemQueue.Count} items from preset.");
+                    _chatGui.Print("Imported {0} items from preset.".Tr(preset.ItemQueue.Count));
                 }
                 ImGui.PopID();
             }
@@ -416,7 +416,7 @@ internal sealed class WorkshoppaWindow : Window
                 });
 
                 Save();
-                _chatGui.Print($"Saved queue as preset '{_newPresetName}'.");
+                _chatGui.Print("Saved queue as preset '{0}'.".Tr(_newPresetName));
                 _newPresetName = string.Empty;
             }
             ImGui.EndDisabled();
@@ -446,7 +446,7 @@ internal sealed class WorkshoppaWindow : Window
                 var preset = _config.Presets.First(x => x.Id == presetToRemove);
                 _config.Presets.Remove(preset);
                 Save();
-                _chatGui.Print($"Deleted preset '{preset.Name}'.");
+                _chatGui.Print("Deleted preset '{0}'.".Tr(preset.Name));
             }
 
             ImGui.EndMenu();
@@ -496,7 +496,7 @@ internal sealed class WorkshoppaWindow : Window
             }
 
             Save();
-            _chatGui.Print($"Imported {fromClipboardItems.Count} items from clipboard.");
+            _chatGui.Print("Imported {0} items from clipboard.".Tr(fromClipboardItems.Count));
         }
         ImGui.EndDisabled();
 
@@ -641,7 +641,7 @@ internal sealed class WorkshoppaWindow : Window
         }
         else
         {
-            _chatGui.PrintError($"[Workshoppa] Leveling Failed - Are you on a DoH/oL Class and by a usable workshop?");
+            _chatGui.PrintError("[Workshoppa] Leveling Failed - Are you on a DoH/oL Class and by a usable workshop?".T());
         }
     }
     private unsafe void DrawLevelingTimeEstimate()
@@ -674,15 +674,15 @@ internal sealed class WorkshoppaWindow : Window
         DrawIfAny("Spruce Log", spruceLog, spruceTurnins);
 
         ImGui.Spacing();
-        ImGui.TextUnformatted($"Remaining Turn-ins: {totalTurnins:N0}");
-        ImGui.TextUnformatted($"Estimated Time Remaining: {FormatEta(eta)}");
+        ImGui.TextUnformatted("Remaining Turn-ins: {0:N0}".Tr(totalTurnins));
+        ImGui.TextUnformatted("Estimated Time Remaining: {0}".Tr(FormatEta(eta)));
 
         ImGui.Unindent(20);
     }
     void DrawIfAny(string label, int mats, int turnins)
     {
         if (mats <= 0 && turnins <= 0) return;
-        ImGui.TextUnformatted($"{label}: {mats:N0} materials / {turnins:N0} turn-ins");
+        ImGui.TextUnformatted("{0}: {1:N0} materials / {2:N0} turn-ins".Tr(label, mats, turnins));
     }
     private static unsafe int GetInventoryCount(InventoryManager* inventoryManager, uint itemId)
     {

@@ -42,7 +42,7 @@ namespace VIWI.UI.Pages
             var snap = config.Current;
 
             ImGuiHelpers.ScaledDummy(4f);
-            ImGui.TextUnformatted($"AutoLogin - V{Version}");
+            ImGui.TextUnformatted("AutoLogin - V{0}".Tr(Version));
             ImGui.SameLine();
             ImGui.TextColored(GradientColor.Get(ImGuiHelper.RainbowColorStart, ImGuiHelper.RainbowColorEnd, 500), "DDoS Begone!");
 
@@ -75,15 +75,15 @@ namespace VIWI.UI.Pages
             if (!string.IsNullOrWhiteSpace(snap.CharacterName))
             {
                 if (config.ServiceAccountIndex > 0)
-                ImGui.TextUnformatted($"Service Account Index: {config.ServiceAccountIndex}");
-                ImGui.TextUnformatted($"Current Saved Character: {snap.CharacterName} @ {snap.HomeWorldName}");
-                ImGui.TextUnformatted($"Home Data Center: {snap.DataCenterName} ({snap.DataCenterID})");
+                ImGui.TextUnformatted("Service Account Index: {0}".Tr(config.ServiceAccountIndex));
+                ImGui.TextUnformatted("Current Saved Character: {0} @ {1}".Tr(snap.CharacterName, snap.HomeWorldName));
+                ImGui.TextUnformatted("Home Data Center: {0} ({1})".Tr(snap.DataCenterName, snap.DataCenterID));
 
                 if (snap.Visiting)
-                    ImGui.TextUnformatted($"Currently Visiting: {snap.CurrentWorldName}, on {snap.vDataCenterName} ({snap.vDataCenterID})");
+                    ImGui.TextUnformatted("Currently Visiting: {0}, on {1} ({2})".Tr(snap.CurrentWorldName, snap.vDataCenterName, snap.vDataCenterID));
 
                 if (config.CurrentRegion != LoginRegion.Unknown)
-                    ImGui.TextUnformatted($"Detected Region: {config.CurrentRegion}");
+                    ImGui.TextUnformatted("Detected Region: {0}".Tr(config.CurrentRegion));
             }
             else
             {
@@ -127,7 +127,7 @@ namespace VIWI.UI.Pages
             ImGuiHelpers.ScaledDummy(2f);
             if (config.RestartingClient || config.PendingRestartRegion != LoginRegion.Unknown)
             {
-                ImGui.TextUnformatted($"Restart State: RestartingClient={config.RestartingClient}, PendingRegion={config.PendingRestartRegion}");
+                ImGui.TextUnformatted("Restart State: RestartingClient={0}, PendingRegion={1}".Tr(config.RestartingClient, config.PendingRestartRegion));
             }
 
             // ----------------------------
@@ -357,7 +357,7 @@ namespace VIWI.UI.Pages
             ImGui.Separator();
             ImGuiHelpers.ScaledDummy(8f);
 
-            ImGui.TextUnformatted($"VIWI has helped you recover from: {config.DCsRecovered} Connection Errors");
+            ImGui.TextUnformatted("VIWI has helped you recover from: {0} Connection Errors".Tr(config.DCsRecovered));
             if (config.DCsRecovered == 0)
             {
                 ImGui.TextColored(GradientColor.Get(ImGuiHelper.RainbowColorStart, ImGuiHelper.RainbowColorEnd, 500), "What are you, an OCE player??");
@@ -373,7 +373,7 @@ namespace VIWI.UI.Pages
 
             if (config.SkipAuthError)
             {
-                ImGui.TextUnformatted($"VIWI has helped you recover from: {config.AuthsRecovered} Authentication Errors");
+                ImGui.TextUnformatted("VIWI has helped you recover from: {0} Authentication Errors".Tr(config.AuthsRecovered));
             }
 
             // ----------------------------
@@ -512,7 +512,7 @@ namespace VIWI.UI.Pages
             }
 
             var visiting = snap.Visiting ? $" (visiting {snap.CurrentWorldName})" : string.Empty;
-            ImGui.TextUnformatted($"{region}: {snap.CharacterName} @ {snap.HomeWorldName}{visiting}");
+            ImGui.TextUnformatted("{0}: {1} @ {2}{3}".Tr(region, snap.CharacterName, snap.HomeWorldName, visiting));
         }
 
         private static void MoveItem<T>(System.Collections.Generic.List<T> list, int from, int to)

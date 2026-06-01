@@ -3,6 +3,7 @@ using Dalamud.Plugin.Services;
 using System;
 using System.Numerics;
 using VIWI.Core;
+using VIWI.Localization;
 using static VIWI.Core.VIWIContext;
 
 namespace VIWI.Modules.SideCheck
@@ -110,7 +111,7 @@ namespace VIWI.Modules.SideCheck
                         $"Quadrant={quadrant}"
                     );
 
-                    ChatGui.Print($"[SideCheck] {target.Name.TextValue}: {quadrant}");
+                    ChatGui.Print("[SideCheck] {0}: {1}".Tr(target.Name.TextValue, quadrant));
                 }
             }
             catch (Exception ex)

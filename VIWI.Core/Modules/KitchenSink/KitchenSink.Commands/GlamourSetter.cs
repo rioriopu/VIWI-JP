@@ -233,8 +233,8 @@ internal sealed class GlamourSetter : Window, IDisposable
 
         var totalRelevant = _glamourSets.Count(s => s.SetType != ESetType.Unobtainable || ownedSets.Contains(s));
 
-        ImGui.TextUnformatted($"Complete Sets: {ownedSets.Count} / {totalRelevant}");
-        ImGui.TextUnformatted($"Space saved: {ownedSets.Sum(s => s.Items.Count - 1)} items");
+        ImGui.TextUnformatted("Complete Sets: {0} / {1}".Tr(ownedSets.Count, totalRelevant));
+        ImGui.TextUnformatted("Space saved: {0} items".Tr(ownedSets.Sum(s => s.Items.Count - 1)));
 
         var showMissingOnly = _cfg.ShowOnlyMissingGlamourSets;
         if (ImGui.Checkbox("Show missing only".T(), ref showMissingOnly))
@@ -326,15 +326,15 @@ internal sealed class GlamourSetter : Window, IDisposable
 
         if (setType == ESetType.PvP)
         {
-            ImGui.TextUnformatted($"Wolf Marks: {_ownedCurrencies.GetValueOrDefault(ItemWolfMarks):N0} / {Needed(ItemWolfMarks):N0}");
-            ImGui.TextUnformatted($"Trophy Crystals: {_ownedCurrencies.GetValueOrDefault(ItemTrophyCrystals):N0} / {Needed(ItemTrophyCrystals):N0}");
+            ImGui.TextUnformatted("Wolf Marks: {0:N0} / {1:N0}".Tr(_ownedCurrencies.GetValueOrDefault(ItemWolfMarks), Needed(ItemWolfMarks)));
+            ImGui.TextUnformatted("Trophy Crystals: {0:N0} / {1:N0}".Tr(_ownedCurrencies.GetValueOrDefault(ItemTrophyCrystals), Needed(ItemTrophyCrystals)));
             ImGui.Separator();
             return;
         }
 
         if (setType == ESetType.MGP || setType == ESetType.Special)
         {
-            ImGui.TextUnformatted($"MGP: {_ownedCurrencies.GetValueOrDefault(ItemMgp):N0} / {Needed(ItemMgp):N0}");
+            ImGui.TextUnformatted("MGP: {0:N0} / {1:N0}".Tr(_ownedCurrencies.GetValueOrDefault(ItemMgp), Needed(ItemMgp)));
             ImGui.Separator();
             return;
         }
@@ -342,7 +342,7 @@ internal sealed class GlamourSetter : Window, IDisposable
         if (setType == ESetType.AlliedSociety)
         {
             foreach (var (itemId, name) in AlliedSocietyCurrencies)
-                ImGui.TextUnformatted($"{name}: {_ownedCurrencies.GetValueOrDefault(itemId):N0} / {Needed(itemId):N0}");
+                ImGui.TextUnformatted("{0}: {1:N0} / {2:N0}".Tr(name, _ownedCurrencies.GetValueOrDefault(itemId), Needed(itemId)));
 
             ImGui.Separator();
         }
@@ -392,7 +392,7 @@ internal sealed class GlamourSetter : Window, IDisposable
                 }
                 else if (item.ShopItem != null)
                 {
-                    ImGui.TextUnformatted($"{item.Name} ({item.ShopItem.CostQuantity:N0}x {item.ShopItem.CostName})");
+                    ImGui.TextUnformatted("{0} ({1:N0}x {2})".Tr(item.Name, item.ShopItem.CostQuantity, item.ShopItem.CostName));
                 }
                 else
                 {

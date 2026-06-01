@@ -28,7 +28,7 @@ namespace VIWI.UI.Pages
                 return;
             }
             ImGuiHelpers.ScaledDummy(4f);
-            ImGui.TextUnformatted($"SideCheck - V{Version}");
+            ImGui.TextUnformatted("SideCheck - V{0}".Tr(Version));
             ImGui.SameLine();
             ImGui.TextColored(GradientColor.Get(ImGuiHelper.RainbowColorStart, ImGuiHelper.RainbowColorEnd, 500), "It's always better from behind!");
             ImGui.TextUnformatted("Enabled:".T());

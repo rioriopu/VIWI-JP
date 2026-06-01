@@ -39,7 +39,7 @@ namespace VIWI.UI.Pages
             }
             ImGuiHelpers.ScaledDummy(4f);
 
-            ImGui.TextUnformatted($"Workshoppa - V{Version}");
+            ImGui.TextUnformatted("Workshoppa - V{0}".Tr(Version));
             ImGui.SameLine();
             ImGui.TextColored(GradientColor.Get(ImGuiHelper.RainbowColorStart, ImGuiHelper.RainbowColorEnd, 500), "Workshop Project Automation");
             ImGui.TextUnformatted("Enabled:".T());
@@ -199,7 +199,7 @@ namespace VIWI.UI.Pages
 
                     ImGui.TableNextColumn();
                     if (eligible)
-                        ImGui.TextUnformatted($"{qtyText}");
+                        ImGui.TextUnformatted("{0}".Tr(qtyText));
                     else
                         ImGui.TextDisabled($"{qtyText}");
                 }

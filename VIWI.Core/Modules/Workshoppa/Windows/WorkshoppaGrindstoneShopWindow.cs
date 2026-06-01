@@ -137,8 +137,8 @@ internal sealed unsafe class WorkshoppaGrindstoneShopWindow : WorkshoppaShopWind
                     "This only requires you to be at least the minimum level shown in config to start,\n" +
                     "Note that after level 90, Workshop projects no longer grant EXP.");
 
-                ImGui.Text($"Buying {Shop.PurchaseState.ItemsLeftToBuy:N0} items...");
-                ImGui.Text($"Estimated Time Remaining: {EstimatePurchaseTime(Shop.PurchaseState.ItemsLeftToBuy)}");
+                ImGui.Text("Buying {0:N0} items...".Tr(Shop.PurchaseState.ItemsLeftToBuy));
+                ImGui.Text("Estimated Time Remaining: {0}".Tr(EstimatePurchaseTime(Shop.PurchaseState.ItemsLeftToBuy)));
                 if (ImGuiComponents.IconButtonWithText(FontAwesomeIcon.Times, "Cancel Auto-Buy"))
                     Shop.CancelAutoPurchase();
                 return;
@@ -267,15 +267,15 @@ internal sealed unsafe class WorkshoppaGrindstoneShopWindow : WorkshoppaShopWind
             int remainingNeeded = Math.Max(0, requiredQty - owned);
             int carryable = Math.Min(maxBuyBySpace, remainingNeeded);
 
-            ImGui.Text($"You have {owned:N0} {activeLabel}."
+            ImGui.Text("You have {0:N0} {1}.".Tr(owned, activeLabel)
                 + $"\nYou need {remainingNeeded} more for your level target of ({targetLevel}).");
-            ImGui.Text($"You can currently carry up to {carryable} more.");
+            ImGui.Text("You can currently carry up to {0} more.".Tr(carryable));
 
             tempBuyCount = carryable;
         }
         else
         {
-            ImGui.Text($"Note that you can enable level targets in the\n" +
+            ImGui.Text("Note that you can enable level targets in the\n".T() +
                 $"VIWI dashboard to get calculations for the Grindstone shop.");
         }
 
@@ -306,7 +306,7 @@ internal sealed unsafe class WorkshoppaGrindstoneShopWindow : WorkshoppaShopWind
         {
             ImGui.Spacing();
             long cost = (long)item.Price * toPurchase;
-            ImGui.TextUnformatted($"Estimated Purchase Time: {EstimatePurchaseTime(toPurchase)}");
+            ImGui.TextUnformatted("Estimated Purchase Time: {0}".Tr(EstimatePurchaseTime(toPurchase)));
 
             if (ImGuiComponents.IconButtonWithText(FontAwesomeIcon.DollarSign, $"Auto-Buy {toPurchase:N0} items for {cost:N0} Gil"))
             {
@@ -380,7 +380,7 @@ internal sealed unsafe class WorkshoppaGrindstoneShopWindow : WorkshoppaShopWind
             return;
         }
 
-        _chatGui.Print($"Starting purchase of {quantity:N0} items.");
+        _chatGui.Print("Starting purchase of {0:N0} items.".Tr(quantity));
         Shop.StartAutoPurchase(quantity);
         Shop.HandleNextPurchaseStep();
     }

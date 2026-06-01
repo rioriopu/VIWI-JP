@@ -49,7 +49,7 @@ namespace VIWI.UI.Pages
 
             ImGuiHelpers.ScaledDummy(4f);
 
-            ImGui.TextUnformatted($"KitchenSink - V{Version}");
+            ImGui.TextUnformatted("KitchenSink - V{0}".Tr(Version));
             ImGui.SameLine();
             ImGui.TextColored(GradientColor.Get(ImGuiHelper.RainbowColorStart, ImGuiHelper.RainbowColorEnd, 500), "Yes, Everything Is Included!");
 
@@ -215,7 +215,7 @@ namespace VIWI.UI.Pages
             ImGui.SetCursorPosX(ImGui.GetCursorPosX() + offset);
 
             ImGui.PushFont(UiBuilder.IconFont);
-            ImGui.TextUnformatted($"{(char)FontAwesomeIcon.ClipboardList}");
+            ImGui.TextUnformatted("{0}".Tr((char)FontAwesomeIcon.ClipboardList));
             ImGui.PopFont();
 
             if (ImGui.IsItemHovered())

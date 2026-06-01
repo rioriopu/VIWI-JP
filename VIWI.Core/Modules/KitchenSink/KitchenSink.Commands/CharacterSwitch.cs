@@ -230,7 +230,7 @@ internal sealed class CharacterSwitch : IDisposable
 
             if (pick == null)
             {
-                _chatGui.PrintError($"[KitchenSink] No character found for \"{arguments}\".", null, null);
+                _chatGui.PrintError("[KitchenSink] No character found for \"{0}\".".Tr(arguments), null, null);
                 return;
             }
 

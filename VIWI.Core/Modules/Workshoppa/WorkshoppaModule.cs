@@ -10,6 +10,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using VIWI.Core;
 using VIWI.IPC;
+using VIWI.Localization;
 using VIWI.Modules.Workshoppa.External;
 using VIWI.Modules.Workshoppa.GameData;
 using VIWI.Modules.Workshoppa.Windows;
@@ -285,14 +286,14 @@ internal sealed partial class WorkshoppaModule : VIWIModuleBase<WorkshoppaConfig
                             }
                             else
                             {
-                                ChatGui.PrintError($"[Workshoppa] Stall detected on stage {CurrentStage} while leveling, Restarting Project.");
-                                ChatGui.PrintError($"[Workshoppa] Please report this message to Vera!");
+                                ChatGui.PrintError("[Workshoppa] Stall detected on stage {0} while leveling, Restarting Project.".Tr(CurrentStage));
+                                ChatGui.PrintError("[Workshoppa] Please report this message to Vera!".T());
                             }
                         }
                         else if (_configuration.Mode != TurnInMode.Leveling)
                         {
-                            ChatGui.PrintError($"[Workshoppa] Stall detected on stage {CurrentStage}, Bailing out.");
-                            ChatGui.PrintError($"[Workshoppa] Please report this message to Vera!");
+                            ChatGui.PrintError("[Workshoppa] Stall detected on stage {0}, Bailing out.".Tr(CurrentStage));
+                            ChatGui.PrintError("[Workshoppa] Please report this message to Vera!".T());
                             CurrentStage = Stage.RequestStop;
                         }
                     }
@@ -389,8 +390,8 @@ internal sealed partial class WorkshoppaModule : VIWIModuleBase<WorkshoppaConfig
                             _mergeAttempts++;
                             if (_mergeAttempts >= MaxMergeAttempts)
                             {
-                                ChatGui.PrintError($"[Workshoppa] Couldn't auto-merge {_mergeItemName} after {_mergeAttempts} attempts. Merge manually to continue.");
-                                ChatGui.PrintError($"[Workshoppa] Note that workshoppa does not support Lowering Quality of materials for your own safety!");
+                                ChatGui.PrintError("[Workshoppa] Couldn't auto-merge {0} after {1} attempts. Merge manually to continue.".Tr(_mergeItemName, _mergeAttempts));
+                                ChatGui.PrintError("[Workshoppa] Note that workshoppa does not support Lowering Quality of materials for your own safety!".T());
                                 CurrentStage = Stage.RequestStop;
                                 ClearMergeState();
                                 break;
@@ -471,7 +472,7 @@ internal sealed partial class WorkshoppaModule : VIWIModuleBase<WorkshoppaConfig
         if (_ceruleumTankWindow.TryParseBuyRequest(arguments, out int missingQuantity))
             _ceruleumTankWindow.StartPurchase(missingQuantity);
         else
-            ChatGui.PrintError($"Usage: {command} <stacks>");
+            ChatGui.PrintError("Usage: {0} <stacks>".Tr(command));
     }
 
     private void ProcessFuelFillCommand(string command, string arguments)
@@ -479,14 +480,14 @@ internal sealed partial class WorkshoppaModule : VIWIModuleBase<WorkshoppaConfig
         if (_ceruleumTankWindow.TryParseFillRequest(arguments, out int missingQuantity))
             _ceruleumTankWindow.StartPurchase(missingQuantity);
         else
-            ChatGui.PrintError($"Usage: {command} <stacks>");
+            ChatGui.PrintError("Usage: {0} <stacks>".Tr(command));
     }
     private void ProcessStoneBuyCommand(string command, string arguments)
     {
         if (_grindstoneShopWindow.TryParseBuyRequest(arguments, out int missingQuantity))
             _grindstoneShopWindow.StartPurchase(missingQuantity);
         else
-            ChatGui.PrintError($"Usage: {command} <stacks>");
+            ChatGui.PrintError("Usage: {0} <stacks>".Tr(command));
     }
 
     private void ProcessStoneFillCommand(string command, string arguments) //TODO: add classjob
@@ -494,8 +495,8 @@ internal sealed partial class WorkshoppaModule : VIWIModuleBase<WorkshoppaConfig
         /*if (_grindstoneShopWindow.TryParseFillRequest(arguments, out int missingQuantity))
             _grindstoneShopWindow.StartPurchase(missingQuantity);
         else
-            ChatGui.PrintError($"Usage: {command} <stacks>");*/
-        ChatGui.PrintError($"Disabled =[");
+            ChatGui.PrintError("Usage: {0} <stacks>".Tr(command));*/
+        ChatGui.PrintError("Disabled =[".T());
     }
     private void ProcessDarkMatterCommand(string command, string arguments)
     {
