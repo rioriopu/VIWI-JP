@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<Authors>VeraNala (forked by Estell)</Authors>
-		<Version>0.3.0.0</Version>
+		<Version>0.4.0.0</Version>
 		<!-- [VIWI-JP] InternalName を本家(VIWI)と区別するため AssemblyName を VIWIJP に。
 		     これにより出力 dll が VIWIJP.dll、Dalamud上のInternalNameも VIWIJP となり本家と併存可能。 -->
 		<AssemblyName>VIWIJP</AssemblyName>
@@ -31,8 +31,9 @@
 	  <Content Include="VIWI.png">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
-	  <!-- [VIWI-JP] 翻訳辞書を出力フォルダへ複製。DalamudPackager もこれを zip に同梱する。 -->
-	  <Content Include="Localization\ja.json">
+	  <!-- [VIWI-JP] 翻訳辞書を出力フォルダへ複製。DalamudPackager もこれを zip に同梱する。
+	       Stage 3D で複数言語対応: ja/en/de/fr を一括コピー。 -->
+	  <Content Include="Localization\*.json">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	</ItemGroup>
@@ -130,7 +131,7 @@
 			<_DeployFiles Include="$(OutputPath)ECommons.dll" />
 			<_DeployFiles Include="$(OutputPath)Pictomancy.dll" />
 			<_DeployFiles Include="$(OutputPath)SharpDX*.dll" />
-			<_DeployLocFiles Include="$(OutputPath)Localization\ja.json" />
+			<_DeployLocFiles Include="$(OutputPath)Localization\*.json" />
 		</ItemGroup>
 		<MakeDir Directories="$(DevPluginsDir);$(DevPluginsDir)\Localization" />
 		<Copy SourceFiles="@(_DeployFiles)" DestinationFolder="$(DevPluginsDir)" SkipUnchangedFiles="true" />

@@ -1,4 +1,5 @@
 using Dalamud.Bindings.ImGui;
+using Dalamud.Interface.Components;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Raii;
 using Lumina.Excel.Sheets;
@@ -99,6 +100,28 @@ namespace VIWI.UI.Pages
             }
 
                 ImGuiHelpers.ScaledDummy(10f);
+
+            // ---------------------------
+            // [VIWI-JP] Language Selector (Stage 3D)
+            // ---------------------------
+            ImGui.TextUnformatted("Language / 言語".T());
+            ImGuiHelpers.ScaledDummy(4f);
+            var currentLangIdx = System.Array.FindIndex(L.AvailableLanguages, l => l.code == L.CurrentLanguage);
+            if (currentLangIdx < 0) currentLangIdx = 0;
+            var langLabels = System.Linq.Enumerable.Select(L.AvailableLanguages, l => l.label).ToArray();
+            ImGui.SetNextItemWidth(180f);
+            if (ImGui.Combo("##viwijp_lang", ref currentLangIdx, langLabels, langLabels.Length))
+            {
+                var newCode = L.AvailableLanguages[currentLangIdx].code;
+                if (L.Reload(newCode))
+                {
+                    VIWIContext.CoreConfig.Language = newCode;
+                    VIWIContext.CoreConfig.Save();
+                }
+            }
+            ImGui.SameLine();
+            ImGuiComponents.HelpMarker("Language settings for the VIWI UI (hot-swap). Future modules use the dictionary at runtime; some texts only refresh on plugin reload.".T());
+            ImGuiHelpers.ScaledDummy(10f);
 
             // ---------------------------
             // System Info

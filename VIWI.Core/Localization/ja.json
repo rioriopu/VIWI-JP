@@ -154,7 +154,6 @@
   "Note that you can enable level targets in the\\n": "目標レベルは以下で有効化できます:\\n",
   "Note: Holding Shift at any point of the login process will cancel this.": "注意: ログイン処理中に Shift を押すといつでもキャンセルできます。",
   "Open Workshoppa UI": "Workshoppa UI を開く",
-  "Opens the VIWI dashboard.": "VIWI ダッシュボードを開きます。",
   "Restart the client using AutoLogin settings. Optional: /viwirestart NA|EU|OCE|JP": "AutoLogin 設定でクライアントを再起動します。オプション: /viwirestart NA|EU|OCE|JP",
   "Set your Target level and ensure you have enough materials to reach it!!": "目標レベルを設定し、達成に十分な素材があることを確認してください！",
   "Support Vera and the development of VIWI ♥\\nOpens Kofi in your browser.": "Vera と VIWI 開発を支援する ♥\\nブラウザで Ko-fi を開きます。",
@@ -180,5 +179,8 @@
   "{0} ({1:N0}x {2})": "{0} ({1:N0}個 × {2})",
   "{0}: {1:N0} / {2:N0}": "{0}: {1:N0} / {2:N0}",
   "{0}: {1:N0} materials / {2:N0} turn-ins": "{0}: 素材{1:N0}個 / 納品{2:N0}回",
-  "{0}: {1} @ {2}{3}": "{0}: {1} @ {2}{3}"
+  "{0}: {1} @ {2}{3}": "{0}: {1} @ {2}{3}",
+  "Language / 言語": "言語 / Language",
+  "Language settings for the VIWI UI (hot-swap). Future modules use the dictionary at runtime; some texts only refresh on plugin reload.": "VIWI UI の表示言語を即時切替します。動的読み込みのため一部テキストはプラグイン再読込時のみ反映されます。",
+  "Opens the VIWI dashboard. Subcommands: /viwi lang <ja|en|de|fr> | /viwi reload-lang": "VIWI ダッシュボードを開きます。サブコマンド: /viwi lang <ja|en|de|fr> | /viwi reload-lang"
 }

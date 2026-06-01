@@ -21,6 +21,10 @@ namespace VIWI.Core
         public bool Unlocked { get; set; } = false;
         public bool SillyMode { get; set; } = false;
 
+        // [VIWI-JP] UI 言語コード ("ja" / "en" / "de" / "fr")。
+        // VIWIPlugin 起動時に L.Load(Language) が呼ばれる。設定変更時は L.Reload(Language) でホットスワップ。
+        public string Language { get; set; } = "ja";
+
         public AoEasyConfig AoEasy { get; set; } = new();
         public AutoLoginConfig AutoLogin { get; set; } = new();
         public KitchenSinkConfig KitchenSink { get; set; } = new();

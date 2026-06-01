@@ -1,3 +1,4 @@
+using System;
 using Dalamud.Interface.Windowing;
 using Dalamud.IoC;
 using Dalamud.Plugin;
@@ -92,8 +93,8 @@ public sealed class VIWIPlugin : IDalamudPlugin
         ECommonsMain.Init(pluginInterface, this, [Module.DalamudReflector]);
         PluginLog.Information("Core + ECommons initialized.");
 
-        // [VIWI-JP] 翻訳辞書をロード（Localization/ja.json）。未配置/未登録キーは原文がそのまま使われる。
-        L.Load();
+        // [VIWI-JP] 翻訳辞書をロード（Config.Language で指定された言語）。未配置/未登録キーは原文がそのまま使われる。
+        L.Load(config.Language);
 
         DashboardWindow = new MainDashboardWindow(config);
         VIWIContext.DashboardWindow = DashboardWindow;
@@ -103,7 +104,7 @@ public sealed class VIWIPlugin : IDalamudPlugin
         PluginInterface.UiBuilder.OpenConfigUi += ToggleMainUI;
         commandManager.AddHandler("/viwi", new Dalamud.Game.Command.CommandInfo(OnCommand)
         {
-            HelpMessage = "Opens the VIWI dashboard.".T()
+            HelpMessage = "Opens the VIWI dashboard. Subcommands: /viwi lang <ja|en|de|fr> | /viwi reload-lang".T()
         });
 
         ModuleManager.Initialize(config);
@@ -129,5 +130,54 @@ public sealed class VIWIPlugin : IDalamudPlugin
 
     private void ToggleMainUI() => DashboardWindow?.Toggle();
 
-    private void OnCommand(string command, string args) => ToggleMainUI();
+    private void OnCommand(string command, string args)
+    {
+        // [VIWI-JP] サブコマンドで言語切替・辞書再読込に対応
+        // /viwi              → ダッシュボード表示切替
+        // /viwi lang <code>  → 言語を切替 (ja/en/de/fr)
+        // /viwi reload-lang  → 現在の言語の辞書を再読込
+        var trimmed = (args ?? string.Empty).Trim();
+        if (string.IsNullOrEmpty(trimmed))
+        {
+            ToggleMainUI();
+            return;
+        }
+
+        var parts = trimmed.Split(' ', 2, StringSplitOptions.RemoveEmptyEntries);
+        var sub = parts[0].ToLowerInvariant();
+        var rest = parts.Length > 1 ? parts[1].Trim() : string.Empty;
+
+        switch (sub)
+        {
+            case "lang":
+            case "language":
+                if (string.IsNullOrEmpty(rest))
+                {
+                    ChatGui.Print($"[VIWI] Current language: {L.CurrentLanguage} ({L.EntryCount} entries). Available: ja/en/de/fr");
+                    return;
+                }
+                var newLang = rest.ToLowerInvariant();
+                if (L.Reload(newLang))
+                {
+                    VIWIContext.CoreConfig.Language = newLang;
+                    VIWIContext.CoreConfig.Save();
+                    ChatGui.Print($"[VIWI] Language switched to {newLang} ({L.EntryCount} entries).");
+                }
+                else
+                {
+                    ChatGui.PrintError($"[VIWI] Failed to switch to '{newLang}'. Falling back to English.");
+                }
+                break;
+            case "reload-lang":
+            case "reload-localization":
+                if (L.Reload(L.CurrentLanguage))
+                    ChatGui.Print($"[VIWI] Reloaded {L.CurrentLanguage}.json ({L.EntryCount} entries).");
+                else
+                    ChatGui.PrintError($"[VIWI] Failed to reload {L.CurrentLanguage}.json.");
+                break;
+            default:
+                ToggleMainUI();
+                break;
+        }
+    }
 }
