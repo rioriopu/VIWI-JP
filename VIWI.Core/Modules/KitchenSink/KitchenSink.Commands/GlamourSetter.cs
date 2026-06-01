@@ -303,13 +303,13 @@ internal sealed class GlamourSetter : Window, IDisposable
         var ownedItems = GetOwnedItems();
         DrawMissingItemHeader(sets, ESetType.Special, ownedSets, ownedItems);
 
-        if (ImGui.CollapsingHeader("Eternal Bonding"))
+        if (ImGui.CollapsingHeader("Eternal Bonding".T()))
             DrawSetRange(sets.Where(s => EternalBondingSets.Contains(s.ItemId)).ToList(), ownedSets, ownedItems);
 
-        if (ImGui.CollapsingHeader("Makai Sets (MGP)"))
+        if (ImGui.CollapsingHeader("Makai Sets (MGP)".T()))
             DrawSetRange(sets.Where(s => MgpMakaiSets.Contains(s.ItemId)).ToList(), ownedSets, ownedItems);
 
-        if (ImGui.CollapsingHeader("Rathalos Sets (undyed)"))
+        if (ImGui.CollapsingHeader("Rathalos Sets (undyed)".T()))
             DrawSetRange(sets.Where(s => UndyedRathalosSets.Contains(s.ItemId)).ToList(), ownedSets, ownedItems);
     }
 

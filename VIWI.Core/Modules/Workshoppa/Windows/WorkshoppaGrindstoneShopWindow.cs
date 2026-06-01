@@ -274,7 +274,7 @@ internal sealed unsafe class WorkshoppaGrindstoneShopWindow : WorkshoppaShopWind
         }
 
         ImGui.SetNextItemWidth(100);
-        ImGui.InputInt("Items to Buy", ref _buyItemCount);
+        ImGui.InputInt("Items to Buy".T(), ref _buyItemCount);
         _buyItemCount = Math.Max(0, _buyItemCount);
         _buyItemCount = Math.Min(_buyItemCount, maxBuyBySpace);
 

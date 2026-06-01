@@ -120,7 +120,7 @@ namespace VIWI.UI.Pages
 
         private void DrawPerCharacterSection(KitchenSinkConfig config, KitchenSinkModule module)
         {
-            if (!ImGui.CollapsingHeader("Per-character settings", ImGuiTreeNodeFlags.DefaultOpen))
+            if (!ImGui.CollapsingHeader("Per-character settings".T(), ImGuiTreeNodeFlags.DefaultOpen))
                 return;
 
             ImGuiComponents.HelpMarker(
@@ -315,7 +315,7 @@ namespace VIWI.UI.Pages
         }
         private void DrawWeaponIconsSection(KitchenSinkConfig config, KitchenSinkModule module)
         {
-            if (!ImGui.CollapsingHeader("Weapon Icons (Armoury Board Overlay)", ImGuiTreeNodeFlags.DefaultOpen))
+            if (!ImGui.CollapsingHeader("Weapon Icons (Armoury Board Overlay)".T(), ImGuiTreeNodeFlags.DefaultOpen))
                 return;
 
             ImGui.PushID("WeaponIconsSettings");

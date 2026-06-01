@@ -193,7 +193,7 @@ def transform(content):
     method_pattern = re.compile(
         r'((?:_chatGui|_chat|chatGui|ChatGui)\.(?:Print|PrintError)\(|'
         r'Notify\.(?:Info|Warning|Success|Error)\(|'
-        r'ImGui\.(?:Text|TextUnformatted|Button)\(|'
+        r'ImGui\.(?:Text|TextUnformatted|Button|BulletText|CollapsingHeader|SeparatorText|BeginMenu|BeginTabItem|RadioButton)\(|'
         r'ImGuiEx\.Text\([^,]+,\s*)'
     )
     out = []

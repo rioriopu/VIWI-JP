@@ -353,7 +353,7 @@ internal sealed class WorkshoppaWindow : Window
 
     private void DrawPresetsMenu()
     {
-        if (!ImGui.BeginMenu("Presets")) return;
+        if (!ImGui.BeginMenu("Presets".T())) return;
 
         if (_config.Presets.Count == 0)
         {
@@ -361,7 +361,7 @@ internal sealed class WorkshoppaWindow : Window
             ImGui.MenuItem("Import Queue from Preset".T());
             ImGui.EndDisabled();
         }
-        else if (ImGui.BeginMenu("Import Queue from Preset"))
+        else if (ImGui.BeginMenu("Import Queue from Preset".T()))
         {
             foreach (var preset in _config.Presets)
             {
@@ -391,7 +391,7 @@ internal sealed class WorkshoppaWindow : Window
             ImGui.MenuItem("Export Queue to Preset".T());
             ImGui.EndDisabled();
         }
-        else if (ImGui.BeginMenu("Export Queue to Preset"))
+        else if (ImGui.BeginMenu("Export Queue to Preset".T()))
         {
             ImGui.InputTextWithHint("", "Preset Name...", ref _newPresetName, 64);
 
@@ -424,7 +424,7 @@ internal sealed class WorkshoppaWindow : Window
             ImGui.MenuItem("Delete Preset".T());
             ImGui.EndDisabled();
         }
-        else if (ImGui.BeginMenu("Delete Preset"))
+        else if (ImGui.BeginMenu("Delete Preset".T()))
         {
             Guid? presetToRemove = null;
             foreach (var preset in _config.Presets)
@@ -451,7 +451,7 @@ internal sealed class WorkshoppaWindow : Window
 
     private void DrawClipboardMenu()
     {
-        if (!ImGui.BeginMenu("Clipboard")) return;
+        if (!ImGui.BeginMenu("Clipboard".T())) return;
 
         List<WorkshoppaConfig.QueuedItem> fromClipboardItems = new();
         try

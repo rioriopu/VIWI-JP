@@ -50,21 +50,21 @@ namespace VIWI.UI.Pages
 
                 var expRemaining = ExpCalc.GetExpRemainingToLevel(VIWIContext.DataManager, playerState, job, targetLevel);
 
-                ImGui.BulletText($"Name: {localPlayer.Name} @ {localPlayer.HomeWorld.Value.Name}");
-                ImGui.BulletText($"Current World: {localPlayer.CurrentWorld.Value.Name}");
-                ImGui.BulletText($"Job: ({job.RowId}) \"{job.Abbreviation}\"  Level: {playerState.GetClassJobLevel(job)}");
-                ImGui.BulletText($"Exp in level: {playerState.GetClassJobExperience(job):N0}");
+                ImGui.BulletText("Name: {0} @ {1}".Tr(localPlayer.Name, localPlayer.HomeWorld.Value.Name));
+                ImGui.BulletText("Current World: {0}".Tr(localPlayer.CurrentWorld.Value.Name));
+                ImGui.BulletText("Job: ({0}) \"{1}\"  Level: {2}".Tr(job.RowId, job.Abbreviation, playerState.GetClassJobLevel(job)));
+                ImGui.BulletText("Exp in level: {0:N0}".Tr(playerState.GetClassJobExperience(job)));
                 //ImGui.TextUnformatted("EXP needed to reach {0}: {1:N0}".Tr(targetLevel, expRemaining));
 
                 var territoryId = VIWIContext.ClientState.TerritoryType;
                 if (VIWIContext.DataManager.GetExcelSheet<TerritoryType>()
                     .TryGetRow(territoryId, out var territoryRow))
                 {
-                    ImGui.BulletText($"Location: ({territoryId}) \"{territoryRow.PlaceName.Value.Name}\"");
+                    ImGui.BulletText("Location: ({0}) \"{1}\"".Tr(territoryId, territoryRow.PlaceName.Value.Name));
                 }
                 else
                 {
-                    ImGui.BulletText("Location: Unknown / invalid territory.");
+                    ImGui.BulletText("Location: Unknown / invalid territory.".T());
                 }
 
                 var target = localPlayer.TargetObject;
@@ -84,14 +84,14 @@ namespace VIWI.UI.Pages
                         adjustedDistance = 0;
                     }
 
-                    ImGui.BulletText($"DistanceToTarget: {adjustedDistance:0.000}");
-                    ImGui.BulletText($"Player rot={rot * 180f / MathF.PI}, Target rot={trot * 180f / MathF.PI}");
+                    ImGui.BulletText("DistanceToTarget: {0:0.000}".Tr(adjustedDistance));
+                    ImGui.BulletText("Player rot={0}, Target rot={1}".Tr(rot * 180f / MathF.PI, trot * 180f / MathF.PI));
                 }
                 else
                 {
-                    ImGui.BulletText("Target: None");
-                    ImGui.BulletText("DistanceToTarget: 0");
-                    ImGui.BulletText($"Player rot={localPlayer.Rotation * 180f / MathF.PI}");
+                    ImGui.BulletText("Target: None".T());
+                    ImGui.BulletText("DistanceToTarget: 0".T());
+                    ImGui.BulletText("Player rot={0}".Tr(localPlayer.Rotation * 180f / MathF.PI));
                 }
             }
             else
@@ -131,21 +131,21 @@ namespace VIWI.UI.Pages
 
             var time = System.DateTime.Now;
             var timeZone = System.TimeZoneInfo.Local;
-            ImGui.BulletText($"Time: {time}");
-            ImGui.BulletText($"Time Zone: {timeZone}");
+            ImGui.BulletText("Time: {0}".Tr(time));
+            ImGui.BulletText("Time Zone: {0}".Tr(timeZone));
 
             var fps = io.Framerate;
             if (fps > 0.1f)
             {
                 var ms = 1000f / fps;
-                ImGui.BulletText($"FPS: {fps:0.0} ({ms:0.0} ms/frame)");
+                ImGui.BulletText("FPS: {0:0.0} ({1:0.0} ms/frame)".Tr(fps, ms));
             }
             else
             {
-                ImGui.BulletText("FPS: Unknown");
+                ImGui.BulletText("FPS: Unknown".T());
             }
 
-            ImGui.BulletText($"Logged in: {VIWIContext.ClientState.IsLoggedIn}");
+            ImGui.BulletText("Logged in: {0}".Tr(VIWIContext.ClientState.IsLoggedIn));
 
             ImGuiHelpers.ScaledDummy(10f);
 
@@ -171,7 +171,7 @@ namespace VIWI.UI.Pages
                         ? (page.IsEnabled ? "Enabled" : "Disabled")
                         : "N/A";
 
-                    ImGui.BulletText($"{page.DisplayName} (V{page.Version}) - {status}");
+                    ImGui.BulletText("{0} (V{1}) - {2}".Tr(page.DisplayName, page.Version, status));
                 }
             }
         }

@@ -73,6 +73,18 @@ PATTERNS = [
     ("sestring",
      re.compile(rf'(?P<pre>\.(?:AddUiForeground|AddText|Append)\()"{STR}"{NEG_T}'),
      lambda m: f'{m.group("pre")}"{m.group("s")}".T()'),
+    # ImGui.CollapsingHeader / BeginMenu / BeginTabItem / TreeNode / SeparatorText / RadioButton
+    ("imgui-misc",
+     re.compile(rf'(?P<pre>ImGui\.(?:CollapsingHeader|BeginMenu|BeginTabItem|TreeNode|SeparatorText|RadioButton|TabItemButton)\()"{STR}"{NEG_T}'),
+     lambda m: f'{m.group("pre")}"{m.group("s")}".T()'),
+    # ImGui.BulletText("...")
+    ("imgui-bullettext",
+     re.compile(rf'(?P<pre>ImGui\.BulletText\()"{STR}"{NEG_T}'),
+     lambda m: f'{m.group("pre")}"{m.group("s")}".T()'),
+    # ImGui.InputInt("label", ref ...) / ImGui.SliderInt / ImGui.InputText / ImGui.Combo
+    ("imgui-input",
+     re.compile(rf'(?P<pre>ImGui\.(?:InputInt|SliderInt|InputText|InputFloat|SliderFloat|Combo)\()"{STR}"{NEG_T}'),
+     lambda m: f'{m.group("pre")}"{m.group("s")}".T()'),
 ]
 
 

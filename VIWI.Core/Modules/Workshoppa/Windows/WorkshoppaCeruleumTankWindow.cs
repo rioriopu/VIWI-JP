@@ -110,7 +110,7 @@ internal sealed unsafe class WorkshoppaCeruleumTankWindow : WorkshoppaShopWindow
         if (Shop.PurchaseState == null)
         {
             ImGui.SetNextItemWidth(100);
-            ImGui.InputInt("Stacks to Buy", ref _buyStackCount);
+            ImGui.InputInt("Stacks to Buy".T(), ref _buyStackCount);
             _buyStackCount = Math.Min(freeInventorySlots, Math.Max(0, _buyStackCount));
 
             if (ceruleumTanks % 999 > 0)
