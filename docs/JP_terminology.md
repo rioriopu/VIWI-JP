@@ -38,25 +38,27 @@ Lodestone Eorzea Database で確認した名称が出典の信頼源です。
 
 > UI上では本フォークは略号を残しています（CRP/MIN等）。本家コードに合わせ、混乱を避ける目的。
 
-## NPCタイプ・ベンダー
+## NPCタイプ・ベンダー（Lodestone照合済み）
 
-| EN | JP（推定） | 状態 |
+| EN | JP（公式） | Lodestone URL |
 |---|---|---|
-| FC Mammet | FCマメット | コミュニティ標準 |
-| Resident Caretaker | ハウジングケアテイカー | 推定 |
-| Junkmonger | ジャンクモンガー | コミュニティ標準（NPC ロール名） |
-| Material Supplier | 資材調達員 | 推定 |
+| Junkmonger | **よろず屋** | [shop/db6a7c44696](https://jp.finalfantasyxiv.com/lodestone/playguide/db/shop/db6a7c44696/) |
+| Resident Caretaker | **居住区担当官** | [shop/a949a719131](https://jp.finalfantasyxiv.com/lodestone/playguide/db/shop/a949a719131/) |
+| Material Supplier | **素材屋** (証書: 雇用証書:素材屋) | [item/d3b13a1650a](https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/d3b13a1650a/) |
+| FC Mammet | FCマメット | 公式表記未確認（コミュニティ標準採用） |
 
-⚠ NPC名は Lodestone のNPC DB（https://jp.finalfantasyxiv.com/lodestone/playguide/db/npc/）で要確認。
-未確認エントリは README / 設定UIで気になる箇所があれば随時 ja.json を編集して反映可能。
+⚠ FFXIV JP の NPC 名は**意外な命名が多い**（Junkmongerは「よろず屋」、直訳の「ジャンクモンガー」ではない）。
+未確認エントリは Lodestone NPC DB（https://jp.finalfantasyxiv.com/lodestone/playguide/db/npc/）で要確認。
 
-## 通貨・ポイント
+## 通貨・ポイント（Lodestone PvPガイド照合済み）
 
-| EN | JP |
-|---|---|
-| Wolf Marks | ウルフマーク |
-| Trophy Crystals | トロフィークリスタル |
-| MGP | MGP（ゴールドソーサーポイント） |
+| EN | JP（公式） | 出典 |
+|---|---|---|
+| Wolf Marks | **対人戦績** ⚠注意 (`ウルフマーク`ではない！) | [pvpguide/system](https://jp.finalfantasyxiv.com/lodestone/playguide/pvpguide/system/) |
+| Trophy Crystals | トロフィークリスタル | (同上) |
+| MGP | MGP（ゴールドソーサーポイント） | — |
+
+⚠ Wolf Marks は **「対人戦績」** で漢字。直訳カタカナ表記は誤り。
 
 ## システム用語
 
@@ -83,8 +85,9 @@ Lodestone Eorzea Database で確認した名称が出典の信頼源です。
 4. `ja.json` に **公式JP名** で追記
 5. 本ドキュメントの対応表に追加（次マージ時の検証用）
 
-## 既知の翻訳齟齬（0.5.0.0 で修正）
+## 既知の翻訳齟齬の修正履歴
 
+### 0.5.0.0 で修正
 | EN | 旧訳（誤） | 新訳（正） |
 |---|---|---|
 | Ceruleum Tank | 蒸気タンク | 青燐水バレル |
@@ -92,4 +95,13 @@ Lodestone Eorzea Database で確認した名称が出典の信頼源です。
 | Grade 6 Dark Matter | ダークマター6 | ダークマターG6 |
 | Spruce Log（追加） | — | スプルース原木 |
 
-これらは「直訳・コミュニティ独自和訳」になっていたものを公式JP名に修正したものです。
+### 0.5.1.0 で追加修正（NPC・通貨）
+| EN | 旧訳（誤） | 新訳（正） |
+|---|---|---|
+| Wolf Marks | ウルフマーク | **対人戦績** |
+| Junkmonger | ジャンクモンガー | **よろず屋** |
+| Resident Caretaker | ハウジングケアテイカー | **居住区担当官** |
+| Material Supplier | マテリアルサプライヤー | **素材屋** |
+
+⚠ FFXIV JP は「直訳・カタカナ転写・全く異なる和訳」が混在するため、**必ず Lodestone で確認**する。
+推測・思い込みでの翻訳は誤訳の温床。
