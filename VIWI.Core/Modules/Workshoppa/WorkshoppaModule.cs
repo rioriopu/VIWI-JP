@@ -100,7 +100,7 @@ internal sealed partial class WorkshoppaModule : VIWIModuleBase<WorkshoppaConfig
         Framework.Update += OnFrameworkUpdate;
 
         CommandManager.AddHandler("/ws", new CommandInfo(ProcessCommand) { ShowInHelp = false });
-        CommandManager.AddHandler("/workshoppa", new CommandInfo(ProcessCommand) { HelpMessage = "Open Workshoppa UI" });
+        CommandManager.AddHandler("/workshoppa", new CommandInfo(ProcessCommand) { HelpMessage = "Open Workshoppa UI".T() });
         CommandManager.AddHandler("/buy-tanks", new CommandInfo(ProcessFuelBuyCommand) { ShowInHelp = false });
         CommandManager.AddHandler("/fill-tanks", new CommandInfo(ProcessFuelFillCommand) { ShowInHelp = false });
         CommandManager.AddHandler("/buy-stone", new CommandInfo(ProcessStoneBuyCommand) { ShowInHelp = false });

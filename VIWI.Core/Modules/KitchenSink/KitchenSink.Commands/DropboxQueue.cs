@@ -218,7 +218,7 @@ internal sealed class DropboxQueue : IDisposable
         {
             _chatGui.Print(
                 new SeStringBuilder()
-                    .AddUiForeground("[KitchenSink] ", 504)
+                    .AddUiForeground("[KitchenSink] ".T(), 504)
                     .Append("/dbq " + string.Join(" ", needed))
                     .Build(),
                 null,
@@ -263,11 +263,11 @@ internal sealed class DropboxQueue : IDisposable
         {
             if (x.Length != 2)
 		    {
-			    return ((string, NeededItem?))("Unable to parse " + string.Join(" ", x) + ".", null);
+			    return ((string, NeededItem?))("Unable to parse {0}.".Tr(string.Join(" ", x)), null);
 		    }
 		    if (!uint.TryParse(x[0], out var result))
 		    {
-			    return ((string, NeededItem?))("Unable to parse item id " + x[0] + ".", null);
+			    return ((string, NeededItem?))("Unable to parse item id {0}.".Tr(x[0]), null);
 		    }
 		    int result2;
 		    if (x[1] == "*")
@@ -276,7 +276,7 @@ internal sealed class DropboxQueue : IDisposable
 		    }
 		    else if (!int.TryParse(x[1], out result2))
 		    {
-			    return ((string, NeededItem?))("Unable to parse quantity " + x[1] + ".", null);
+			    return ((string, NeededItem?))("Unable to parse quantity {0}.".Tr(x[1]), null);
 		    }
             return (string.Empty, new NeededItem(result, result2));
         }).ToList();

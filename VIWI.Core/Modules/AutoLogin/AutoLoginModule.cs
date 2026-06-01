@@ -22,6 +22,7 @@ using VIWI.Core;
 using VIWI.Helpers;
 using VIWI.IPC;
 using VIWI.Modules.AutoLogin.Windows;
+using VIWI.Localization;
 using static FFXIVClientStructs.FFXIV.Client.UI.Misc.CharaView.Delegates;
 using static VIWI.Core.VIWIContext;
 
@@ -110,7 +111,7 @@ namespace VIWI.Modules.AutoLogin
                     RequestClientRestart(region);
                 })
                 {
-                    HelpMessage = "Restart the client using AutoLogin settings. Optional: /viwirestart NA|EU|OCE|JP",
+                    HelpMessage = "Restart the client using AutoLogin settings. Optional: /viwirestart NA|EU|OCE|JP".T(),
                     ShowInHelp = true,
                 });
                 CheckRestartFlag();

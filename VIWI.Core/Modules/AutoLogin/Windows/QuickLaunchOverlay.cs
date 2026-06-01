@@ -20,7 +20,7 @@ namespace VIWI.Modules.AutoLogin.Windows
         private ISharedImmediateTexture? _viwiIcon;
 
         public QuickLaunchOverlay()
-            : base("VIWI AutoLogin QuickLaunch##VIWI_AutoLoginQuickLaunch",
+            : base("VIWI AutoLogin QuickLaunch##VIWI_AutoLoginQuickLaunch".T(),
                   ImGuiWindowFlags.AlwaysAutoResize |
                   ImGuiWindowFlags.NoCollapse |
                   ImGuiWindowFlags.NoTitleBar |

@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<Authors>VeraNala (forked by Estell)</Authors>
-		<Version>0.2.0.0</Version>
+		<Version>0.3.0.0</Version>
 		<!-- [VIWI-JP] InternalName を本家(VIWI)と区別するため AssemblyName を VIWIJP に。
 		     これにより出力 dll が VIWIJP.dll、Dalamud上のInternalNameも VIWIJP となり本家と併存可能。 -->
 		<AssemblyName>VIWIJP</AssemblyName>

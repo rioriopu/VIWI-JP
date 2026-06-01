@@ -76,7 +76,7 @@ internal sealed class BunnyBlessed : IDisposable
 	private void ProcessCommand(string command, string arguments)
 	{
 		_enabled = !_enabled;
-		_chatGui.Print("Bunny locations are now ".T() + (_enabled ? "marked" : "disabled") + ".", (string?)null, (ushort?)null);
+		_chatGui.Print("Bunny locations are now {0}.".Tr(_enabled ? "marked".T() : "disabled".T()), (string?)null, (ushort?)null);
 		OnTerritoryChanged(_clientState.TerritoryType);
 	}
 

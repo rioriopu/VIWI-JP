@@ -103,7 +103,7 @@ public sealed class VIWIPlugin : IDalamudPlugin
         PluginInterface.UiBuilder.OpenConfigUi += ToggleMainUI;
         commandManager.AddHandler("/viwi", new Dalamud.Game.Command.CommandInfo(OnCommand)
         {
-            HelpMessage = "Opens the VIWI dashboard."
+            HelpMessage = "Opens the VIWI dashboard.".T()
         });
 
         ModuleManager.Initialize(config);

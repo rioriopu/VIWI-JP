@@ -60,9 +60,7 @@ namespace VIWI.UI.Pages
             ImGui.TextUnformatted("Description:".T());
             ImGuiHelpers.ScaledDummy(4f);
             ImGui.TextWrapped(
-                "AutoLogin is an Anti-DDoS module that will store the details of your last-known active character " +
-                "and attempt to automatically reconnect to them in the event of a sudden disconnect.\n" +
-                "In addition, AutoLogin prevents your client from killing itself on any lobby/disconnection errors."
+                "AutoLogin is an Anti-DDoS module that will store the details of your last-known active character and attempt to automatically reconnect to them in the event of a sudden disconnect.\nIn addition, AutoLogin prevents your client from killing itself on any lobby/disconnection errors."
             );
 
             ImGuiHelpers.ScaledDummy(8f);
@@ -88,9 +86,7 @@ namespace VIWI.UI.Pages
             else
             {
                 ImGui.TextDisabled(
-                    "No Character Detected" +
-                    "\nAutoLogin updates character data on Logins, as well as World/Area changes" +
-                    "\nIf you're logged in and seeing this message, move around!"
+                    "No Character Detected\nAutoLogin updates character data on Logins, as well as World/Area changes\nIf you're logged in and seeing this message, move around!"
                 );
             }
 
@@ -122,7 +118,7 @@ namespace VIWI.UI.Pages
                 module?.SaveConfig();
             }
             ImGui.SameLine();
-            ImGuiComponents.HelpMarker("Note: Holding Shift at any point of the login process will cancel this.");
+            ImGuiComponents.HelpMarker("Note: Holding Shift at any point of the login process will cancel this.".T());
 
             ImGuiHelpers.ScaledDummy(2f);
             if (config.RestartingClient || config.PendingRestartRegion != LoginRegion.Unknown)
@@ -145,12 +141,7 @@ namespace VIWI.UI.Pages
             }
             ImGui.SameLine();
             ImGuiComponents.HelpMarker(
-                "Experimental: Will attempt to restart your client in the event of an Auth Error." +
-                "\nSome notes on this:" +
-                "\nIf you have an OTP on your account you will need to use the XIV Auth App" +
-                "\nIf you do not enable \"Log in automatically\" in XIVLauncher this will not work." +
-                "\nIf you do not set up commands or AR Multi on launch, this will only log you back into your last character, nothing else." +
-                "\nYou are using this feature entirely at your own risk - It is literally accessing files on your PC to open clients."
+                "Experimental: Will attempt to restart your client in the event of an Auth Error.\nSome notes on this:\nIf you have an OTP on your account you will need to use the XIV Auth App\nIf you do not enable \"Log in automatically\" in XIVLauncher this will not work.\nIf you do not set up commands or AR Multi on launch, this will only log you back into your last character, nothing else.\nYou are using this feature entirely at your own risk - It is literally accessing files on your PC to open clients."
             );
             ImGui.SameLine();
             bool canRestart = config.SkipAuthError && !string.IsNullOrWhiteSpace(_launchPathBuf);
@@ -165,7 +156,7 @@ namespace VIWI.UI.Pages
                 }
             }
             ImGui.SameLine();
-            ImGuiComponents.HelpMarker("Launches a new client using your settings, and kills this one - resetting your Auth Token.");
+            ImGuiComponents.HelpMarker("Launches a new client using your settings, and kills this one - resetting your Auth Token.".T());
             using (ImRaii.Disabled(!canRestart))
             {
                 bool lor = config.LoginOnRestart;
@@ -241,8 +232,7 @@ namespace VIWI.UI.Pages
                 module?.SaveConfig();
             }
             ImGuiComponents.HelpMarker(
-                "These commands run once after the game reports a successful login.\n" +
-                "Commands are executed with a small delay between each."
+                "These commands run once after the game reports a successful login.\nCommands are executed with a small delay between each."
             );
 
             bool skipWhenAR = config.ARActiveSkipLoginCommands;
@@ -251,7 +241,7 @@ namespace VIWI.UI.Pages
                 config.ARActiveSkipLoginCommands = skipWhenAR;
                 module?.SaveConfig();
             }
-            ImGuiComponents.HelpMarker("When Enabled, if AutoRetainer is Busy or in MultiMode, AutoLogin will not run custom login commands.");
+            ImGuiComponents.HelpMarker("When Enabled, if AutoRetainer is Busy or in MultiMode, AutoLogin will not run custom login commands.".T());
 
             ImGuiHelpers.ScaledDummy(6f);
 
@@ -404,7 +394,7 @@ namespace VIWI.UI.Pages
                         PluginLog.Information("Triggered client restart (debug).");
                     }
                 }
-                ImGuiComponents.HelpMarker("Triggers the same restart path used for auth error recovery.");
+                ImGuiComponents.HelpMarker("Triggers the same restart path used for auth error recovery.".T());
                 ImGui.PopStyleColor(3);
                 ImGui.PopStyleVar(2);
             }

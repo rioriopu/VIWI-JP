@@ -67,9 +67,7 @@ namespace VIWI.UI.Pages
             ImGui.TextUnformatted("Description:".T());
             ImGuiHelpers.ScaledDummy(4f);
             ImGui.TextWrapped(
-                "KitchenSink is a collection of small utility tools, overlays, and QoL commands originally put together by Liza.\n" +
-                "Character Switching helpers, Dropbox helpers, GlamourSet Tracking, OC Carrot Markers, and more!\n" +
-                "Some features require specific plugins (e.g. AutoRetainer, Dropbox) to be installed."
+                "KitchenSink is a collection of small utility tools, overlays, and QoL commands originally put together by Liza.\nCharacter Switching helpers, Dropbox helpers, GlamourSet Tracking, OC Carrot Markers, and more!\nSome features require specific plugins (e.g. AutoRetainer, Dropbox) to be installed."
             );
 
             ImGuiHelpers.ScaledDummy(8f);
@@ -110,17 +108,14 @@ namespace VIWI.UI.Pages
             ImGui.TextUnformatted("AutoRetainer:".T());
             ImGui.SameLine();
             ImGui.TextColored(arReady ? new Vector4(0.3f, 1f, 0.3f, 1f) : arLoaded ? new Vector4(1f, 0.75f, 0.3f, 1f) : new Vector4(1f, 0.3f, 0.3f, 1f), arReady ? "Ready" : arLoaded ? "Loaded (not ready)" : "Not loaded");
-            ImGuiComponents.HelpMarker("AutoRetainer enables some character-aware features in KitchenSink:\n\n" +
-                                        "• Character switching commands (/k+, /k-, /ks)\n" +
-                                        "• DTR bar character index display\n" +
-                                        "• Character storing for leve count indicators\n");
+            ImGuiComponents.HelpMarker("AutoRetainer enables some character-aware features in KitchenSink:\n\n• Character switching commands (/k+, /k-, /ks)\n• DTR bar character index display\n• Character storing for leve count indicators\n".T());
             bool dbLoaded = IPCHelper.IsPluginLoaded("Dropbox");
             bool dbReady = dbLoaded;
 
             ImGui.TextUnformatted("Dropbox:".T());
             ImGui.SameLine();
             ImGui.TextColored(dbReady ? new Vector4(0.3f, 1f, 0.3f, 1f) : dbLoaded ? new Vector4(1f, 0.75f, 0.3f, 1f) : new Vector4(1f, 0.3f, 0.3f, 1f), dbReady ? "Ready" : dbLoaded ? "Loaded (not ready)" : "Not loaded");
-            ImGuiComponents.HelpMarker("Dropbox enables inventory and trade helpers via /dbq commands.");
+            ImGuiComponents.HelpMarker("Dropbox enables inventory and trade helpers via /dbq commands.".T());
         }
 
         private void DrawPerCharacterSection(KitchenSinkConfig config, KitchenSinkModule module)
@@ -129,8 +124,7 @@ namespace VIWI.UI.Pages
                 return;
 
             ImGuiComponents.HelpMarker(
-                "KitchenSink stores some options per character (by LocalContentId).\n" +
-                "If you don't see your character here, log in once so KitchenSink can capture it."
+                "KitchenSink stores some options per character (by LocalContentId).\nIf you don't see your character here, log in once so KitchenSink can capture it."
             );
 
             ImGuiHelpers.ScaledDummy(2f);
@@ -332,7 +326,7 @@ namespace VIWI.UI.Pages
                 config.WeaponIconsEnabled = enabled;
                 module.SaveConfig();
             }
-            ImGuiComponents.HelpMarker("Draws job/role icons over Armoury Board item slots.");
+            ImGuiComponents.HelpMarker("Draws job/role icons over Armoury Board item slots.".T());
 
             bool mini = config.WeaponIconsMiniMode;
             if (ImGui.Checkbox("Mini mode (bottom-left icons)".T(), ref mini))
@@ -340,7 +334,7 @@ namespace VIWI.UI.Pages
                 config.WeaponIconsMiniMode = mini;
                 module.SaveConfig();
             }
-            ImGuiComponents.HelpMarker("Draws smaller icons anchored to the bottom-left of each Armoury slot.");
+            ImGuiComponents.HelpMarker("Draws smaller icons anchored to the bottom-left of each Armoury slot.".T());
 
             bool requireCtrl = config.WeaponIconsRequireCtrl;
             if (ImGui.Checkbox("Require Ctrl key".T(), ref requireCtrl))
@@ -348,7 +342,7 @@ namespace VIWI.UI.Pages
                 config.WeaponIconsRequireCtrl = requireCtrl;
                 module.SaveConfig();
             }
-            ImGuiComponents.HelpMarker("When enabled, overlay only appears while holding Ctrl.");
+            ImGuiComponents.HelpMarker("When enabled, overlay only appears while holding Ctrl.".T());
 
         }
         private static void DrawCommandsCheatsheet()

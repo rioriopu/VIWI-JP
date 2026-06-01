@@ -54,12 +54,7 @@ namespace VIWI.UI.Pages
             ImGui.TextUnformatted("Description:".T());
             ImGuiHelpers.ScaledDummy(4f);
             ImGui.TextWrapped(
-                "Workshoppa is a workshop project manager and automator originally created by Liza,\n" +
-                "now completely rewritten using ECommons and fully integrated into VIWI.\n" +
-                "Workshoppa allows you to queue multiple company projects and automatically turn in the required materials\n" +
-                "to progress each project to its next stage.\n" +
-                "Additionally, Workshoppa includes features for automatically purchasing Grade 6 Dark Matter for repair kits,\n" +
-                "as well as recursively purchasing ceruleum fuel tanks from the FC mammet."
+                "Workshoppa is a workshop project manager and automator originally created by Liza,\nnow completely rewritten using ECommons and fully integrated into VIWI.\nWorkshoppa allows you to queue multiple company projects and automatically turn in the required materials\nto progress each project to its next stage.\nAdditionally, Workshoppa includes features for automatically purchasing Grade 6 Dark Matter for repair kits,\nas well as recursively purchasing ceruleum fuel tanks from the FC mammet."
             );
             ImGui.Separator();
 
@@ -73,8 +68,7 @@ namespace VIWI.UI.Pages
                 config.EnableRepairKitCalculator = enableRepair;
                 WorkshoppaModule.Instance?.SaveConfig();
             }
-            ImGuiComponents.HelpMarker("Feature to Automatically purchase Grade6DarkMatter from *JUNKMONGER* vendors. \n" +
-                "This is based off the CURRENT number of DarkMatterCLUSTERS you have in your inventory at a 5:1 ratio for crafting RepairKits.");
+            ImGuiComponents.HelpMarker("Feature to Automatically purchase Grade6DarkMatter from *JUNKMONGER* vendors. \nThis is based off the CURRENT number of DarkMatterCLUSTERS you have in your inventory at a 5:1 ratio for crafting RepairKits.".T());
 
             bool enableTanks = config.EnableCeruleumTankCalculator;
             if (ImGui.Checkbox("Enable Ceruleum Tank Calculator".T(), ref enableTanks))
@@ -82,8 +76,7 @@ namespace VIWI.UI.Pages
                 config.EnableCeruleumTankCalculator = enableTanks;
                 WorkshoppaModule.Instance?.SaveConfig();
             }
-            ImGuiComponents.HelpMarker("Feature to Automatically purchase CerueleumFuelTanks from *FC MAMMET & RESIDENT CARETAKER* vendors. \n" +
-                "Just input how many stacks of fuel you would like to buy in the respective window.");
+            ImGuiComponents.HelpMarker("Feature to Automatically purchase CerueleumFuelTanks from *FC MAMMET & RESIDENT CARETAKER* vendors. \nJust input how many stacks of fuel you would like to buy in the respective window.".T());
 
             bool enableMudstone = config.EnableGrindstoneShopCalculator;
             if (ImGui.Checkbox("Enable Mudstone Calculator".T(), ref enableMudstone))
@@ -91,8 +84,7 @@ namespace VIWI.UI.Pages
                 config.EnableGrindstoneShopCalculator = enableMudstone;
                 WorkshoppaModule.Instance?.SaveConfig();
             }
-            ImGuiComponents.HelpMarker("Feature to Automatically purchase Mudstone from *(RESIDENTIAL DISTRICT) MATERIAL SUPPLIER* vendors. \n" +
-                "Just input how many stacks of mudstones you would like to buy in the respective window.");
+            ImGuiComponents.HelpMarker("Feature to Automatically purchase Mudstone from *(RESIDENTIAL DISTRICT) MATERIAL SUPPLIER* vendors. \nJust input how many stacks of mudstones you would like to buy in the respective window.".T());
 
             ImGuiHelpers.ScaledDummy(8f);
             ImGui.Separator();
@@ -100,7 +92,7 @@ namespace VIWI.UI.Pages
 
             ImGui.TextUnformatted("Grindstone Level Targets".T());
             ImGui.SameLine();
-            ImGuiComponents.HelpMarker("Set your Target level and ensure you have enough materials to reach it!!");
+            ImGuiComponents.HelpMarker("Set your Target level and ensure you have enough materials to reach it!!".T());
 
             var dm = VIWIContext.DataManager;
             var ps = VIWIContext.PlayerState;
@@ -128,7 +120,7 @@ namespace VIWI.UI.Pages
                 ImGui.TableSetupColumn("Required Material", ImGuiTableColumnFlags.WidthStretch);
                 ImGui.TableSetupColumn("Quantity", ImGuiTableColumnFlags.WidthStretch);
                 ImGui.SameLine();
-                ImGuiComponents.HelpMarker("This takes Road-To-90 status into consideration! Buy whatever number you see!");
+                ImGuiComponents.HelpMarker("This takes Road-To-90 status into consideration! Buy whatever number you see!".T());
                 ImGui.TableHeadersRow();
 
                 void JobRow(ref bool active, string label, ClassJob? job, ref int targetValue, string reqMat, int qtyText, bool eligible, string statusText)

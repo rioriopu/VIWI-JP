@@ -50,7 +50,7 @@ internal sealed class WorkshoppaWindow : Window
         IChatGui chatGui,
         RecipeTree recipeTree,
         IPluginLog pluginLog)
-            : base("Workshoppa###VIWI_WorkshoppaWindow")
+            : base("Workshoppa###VIWI_WorkshoppaWindow".T())
     {
         _module = module;
         _clientState = clientState;
@@ -218,13 +218,7 @@ internal sealed class WorkshoppaWindow : Window
             ImGui.SameLine();
 
             ImGuiComponents.HelpMarker(
-                "SEE VIWI CONFIG - WORKSHOPPA - GRINDSTONE\n" +
-                "**Note that clicking Level Up Classes will clear your QUEUE!!**\n\n" +
-                "This is an experimental leveling feature that will repeatedly start and\n" +
-                "discontinue projects while turning in materials to level various classes.\n\n" +
-                "This only requires you to meet a minimum level to start,\n" +
-                "and is a bit costly in later levels, but takes minimal time and effort on your part.\n\n" +
-                "Note that after level 90, Workshop projects no longer grant EXP.");
+                "SEE VIWI CONFIG - WORKSHOPPA - GRINDSTONE\n**Note that clicking Level Up Classes will clear your QUEUE!!**\n\nThis is an experimental leveling feature that will repeatedly start and\ndiscontinue projects while turning in materials to level various classes.\n\nThis only requires you to meet a minimum level to start,\nand is a bit costly in later levels, but takes minimal time and effort on your part.\n\nNote that after level 90, Workshop projects no longer grant EXP.");
 
             ImGui.SameLine();
 

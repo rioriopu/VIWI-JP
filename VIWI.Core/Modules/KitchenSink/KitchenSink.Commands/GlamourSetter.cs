@@ -113,7 +113,7 @@ internal sealed class GlamourSetter : Window, IDisposable
         IAddonLifecycle addonLifecycle,
         KitchenSinkConfig cfg,
         System.Action saveConfig)
-        : base("Glamour Sets###KsGlamourSets")
+        : base("Glamour Sets###KsGlamourSets".T())
     {
         _pi = pi;
         _data = data;

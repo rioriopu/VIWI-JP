@@ -364,3 +364,11 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# ─── [VIWI-JP] フォーク固有 ────────────────────────────────────
+# ローカルにステージするリリース zip（生成物。GitHub Release 経由で配布する）
+VIWIJP.zip
+# 翻訳補助スクリプトの一時出力
+_extracted_*.txt
+_ja_missing.txt
+_ja_unused.txt

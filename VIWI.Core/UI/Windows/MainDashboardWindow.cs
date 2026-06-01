@@ -25,7 +25,7 @@ namespace VIWI.UI.Windows
         private Type? _pendingPageType;
 
         public MainDashboardWindow(VIWIConfig config)
-            : base("VIWI - Vera's Integrated World Improvements##VIWI Dashboard",
+            : base("VIWI - Vera's Integrated World Improvements##VIWI Dashboard".T(),
                   ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse)
         {
             _config = config;
@@ -214,7 +214,7 @@ namespace VIWI.UI.Windows
             }
             ImGui.PopStyleVar(2);
             if (ImGui.IsItemHovered())
-                ImGui.SetTooltip("Support Vera and the development of VIWI ♥\nOpens Kofi in your browser.");
+                ImGui.SetTooltip("Support Vera and the development of VIWI ♥\nOpens Kofi in your browser.".T());
         }
 
         private string _passkeyInput = string.Empty;

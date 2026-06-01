@@ -305,8 +305,8 @@ internal sealed class CharacterSwitch : IDisposable
                 var regChars = _autoRetainer.GetRegisteredCIDs();
                 if (regChars == null || regChars.Count == 0)
                 {
-                    _dtrBarEntry.Text = new SeStringBuilder().AddText("AR:0").Build();
-                    _dtrBarEntry.Tooltip = new SeStringBuilder().AddText("AutoRetainer returned 0 registered characters.").Build();
+                    _dtrBarEntry.Text = new SeStringBuilder().AddText("AR:0".T()).Build();
+                    _dtrBarEntry.Tooltip = new SeStringBuilder().AddText("AutoRetainer returned 0 registered characters.".T()).Build();
                     _dtrBarEntry.Shown = true;
                     return;
                 }
@@ -314,8 +314,8 @@ internal sealed class CharacterSwitch : IDisposable
                 var idx = regChars.IndexOf(_playerState.ContentId);
                 if (idx < 0)
                 {
-                    _dtrBarEntry.Text = new SeStringBuilder().AddText("AR:?").Build();
-                    _dtrBarEntry.Tooltip = new SeStringBuilder().AddText("Current CID was not found in AutoRetainer's list.").Build();
+                    _dtrBarEntry.Text = new SeStringBuilder().AddText("AR:?".T()).Build();
+                    _dtrBarEntry.Tooltip = new SeStringBuilder().AddText("Current CID was not found in AutoRetainer's list.".T()).Build();
                     _dtrBarEntry.Shown = true;
                     return;
                 }
@@ -334,7 +334,7 @@ internal sealed class CharacterSwitch : IDisposable
                 else
                 {
                     _dtrBarEntry.Tooltip = new SeStringBuilder()
-                        .AddText("Could not read OfflineCharacterInfo.\nSee /xllog for dump.")
+                        .AddText("Could not read OfflineCharacterInfo.\nSee /xllog for dump.".T())
                         .Build();
                 }
 

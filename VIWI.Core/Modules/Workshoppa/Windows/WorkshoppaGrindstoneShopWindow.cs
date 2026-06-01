@@ -132,10 +132,7 @@ internal sealed unsafe class WorkshoppaGrindstoneShopWindow : WorkshoppaShopWind
                 }
 
                 ImGui.Text("Grindstone".T());
-                ImGuiComponents.HelpMarker("This complements Workshoppa's experimental leveling feature that will\n" +
-                    "repeatedly start and discontinue projects while turning in items to level classes\n\n" +
-                    "This only requires you to be at least the minimum level shown in config to start,\n" +
-                    "Note that after level 90, Workshop projects no longer grant EXP.");
+                ImGuiComponents.HelpMarker("This complements Workshoppa's experimental leveling feature that will\nrepeatedly start and discontinue projects while turning in items to level classes\n\nThis only requires you to be at least the minimum level shown in config to start,\nNote that after level 90, Workshop projects no longer grant EXP.".T());
 
                 ImGui.Text("Buying {0:N0} items...".Tr(Shop.PurchaseState.ItemsLeftToBuy));
                 ImGui.Text("Estimated Time Remaining: {0}".Tr(EstimatePurchaseTime(Shop.PurchaseState.ItemsLeftToBuy)));
@@ -159,10 +156,7 @@ internal sealed unsafe class WorkshoppaGrindstoneShopWindow : WorkshoppaShopWind
         int freeInventorySlots = Shop.CountFreeInventorySlots();
 
         ImGui.Text("Grindstone".T());
-        ImGuiComponents.HelpMarker("This complements Workshoppa's experimental leveling feature that will\n" +
-            "repeatedly start and discontinue projects while turning in items to level classes\n\n" +
-            "This only requires you to be at least the minimum level shown in config to start,\n" +
-            "Note that after level 90, Workshop projects no longer grant EXP.");
+        ImGuiComponents.HelpMarker("This complements Workshoppa's experimental leveling feature that will\nrepeatedly start and discontinue projects while turning in items to level classes\n\nThis only requires you to be at least the minimum level shown in config to start,\nNote that after level 90, Workshop projects no longer grant EXP.".T());
 
         int spaceInPartials = Shop.SumFreeSpaceInPartials(activeItemId);
         int maxBuyBySpace = freeInventorySlots * 999 + spaceInPartials;
@@ -298,7 +292,7 @@ internal sealed unsafe class WorkshoppaGrindstoneShopWindow : WorkshoppaShopWind
         }
 
         ImGui.SameLine();
-        ImGuiComponents.HelpMarker("This requires Lifestream to be enabled");
+        ImGuiComponents.HelpMarker("This requires Lifestream to be enabled".T());
 
         int missingItems = _buyItemCount;
         int toPurchase = Math.Min(Shop.GetMaxItemsToPurchase(), missingItems);

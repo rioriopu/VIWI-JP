@@ -8,6 +8,7 @@ using Dalamud.Plugin.Services;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using Lumina.Excel;
 using Lumina.Excel.Sheets;
+using VIWI.Localization;
 
 namespace VIWI.Modules.KitchenSink.Commands;
 
@@ -28,7 +29,7 @@ internal sealed class WeatherForecast : Window, IDisposable
         ICommandManager commandManager,
         IChatGui chatGui,
         ITextureProvider textureProvider)
-        : base("Weather Forecast###KsWeatherForecast")
+        : base("Weather Forecast###KsWeatherForecast".T())
     {
         _clientState = clientState;
         _commandManager = commandManager;
