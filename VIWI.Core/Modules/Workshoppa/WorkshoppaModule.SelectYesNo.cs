@@ -4,6 +4,7 @@ using Dalamud.Game.Addon.Lifecycle.AddonArgTypes;
 using Dalamud.Memory;
 using Dalamud.Utility;
 using FFXIVClientStructs.FFXIV.Client.UI;
+using VIWI.Localization;
 using static VIWI.Core.VIWIContext;
 
 namespace VIWI.Modules.Workshoppa;
@@ -95,7 +96,7 @@ internal sealed partial class WorkshoppaModule
                 addonSelectYesNo->AtkUnitBase.FireCallbackInt(0);
                 if (AllLevelingMaterialsExhausted() || AllLevelingTargetsDisabled())
                 {
-                    ChatGui.Print("[Workshoppa] Reached Target Level or out of Materials, Stopping.");
+                    ChatGui.Print("[Workshoppa] Reached Target Level or out of Materials, Stopping.".T());
                     CurrentStage = Stage.RequestStop;
                 }
                 else

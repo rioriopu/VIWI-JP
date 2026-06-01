@@ -10,6 +10,7 @@ using System.Numerics;
 using VIWI.Core;
 using VIWI.Helpers;
 using VIWI.Modules.KitchenSink;
+using VIWI.Localization;
 
 namespace VIWI.UI.Pages
 {
@@ -52,7 +53,7 @@ namespace VIWI.UI.Pages
             ImGui.SameLine();
             ImGui.TextColored(GradientColor.Get(ImGuiHelper.RainbowColorStart, ImGuiHelper.RainbowColorEnd, 500), "Yes, Everything Is Included!");
 
-            ImGui.TextUnformatted("Enabled:");
+            ImGui.TextUnformatted("Enabled:".T());
             ImGui.SameLine();
             ImGui.TextColored(
                 config.Enabled ? new Vector4(0.3f, 1f, 0.3f, 1f) : new Vector4(1f, 0.3f, 0.3f, 1f),
@@ -63,7 +64,7 @@ namespace VIWI.UI.Pages
             ImGui.Separator();
             ImGuiHelpers.ScaledDummy(8f);
 
-            ImGui.TextUnformatted("Description:");
+            ImGui.TextUnformatted("Description:".T());
             ImGuiHelpers.ScaledDummy(4f);
             ImGui.TextWrapped(
                 "KitchenSink is a collection of small utility tools, overlays, and QoL commands originally put together by Liza.\n" +
@@ -93,7 +94,7 @@ namespace VIWI.UI.Pages
         {
             var loggedIn = VIWIContext.ClientState?.IsLoggedIn ?? false;
 
-            ImGui.TextUnformatted("Status:");
+            ImGui.TextUnformatted("Status:".T());
             ImGui.SameLine();
             ImGui.TextColored(loggedIn ? new Vector4(0.3f, 1f, 0.3f, 1f) : new Vector4(1f, 0.75f, 0.3f, 1f), loggedIn ? "Logged in" : "Not logged in");
 
@@ -106,7 +107,7 @@ namespace VIWI.UI.Pages
                 try { arReady = ar!.Ready; } catch { arReady = false; }
             }
 
-            ImGui.TextUnformatted("AutoRetainer:");
+            ImGui.TextUnformatted("AutoRetainer:".T());
             ImGui.SameLine();
             ImGui.TextColored(arReady ? new Vector4(0.3f, 1f, 0.3f, 1f) : arLoaded ? new Vector4(1f, 0.75f, 0.3f, 1f) : new Vector4(1f, 0.3f, 0.3f, 1f), arReady ? "Ready" : arLoaded ? "Loaded (not ready)" : "Not loaded");
             ImGuiComponents.HelpMarker("AutoRetainer enables some character-aware features in KitchenSink:\n\n" +
@@ -116,7 +117,7 @@ namespace VIWI.UI.Pages
             bool dbLoaded = IPCHelper.IsPluginLoaded("Dropbox");
             bool dbReady = dbLoaded;
 
-            ImGui.TextUnformatted("Dropbox:");
+            ImGui.TextUnformatted("Dropbox:".T());
             ImGui.SameLine();
             ImGui.TextColored(dbReady ? new Vector4(0.3f, 1f, 0.3f, 1f) : dbLoaded ? new Vector4(1f, 0.75f, 0.3f, 1f) : new Vector4(1f, 0.3f, 0.3f, 1f), dbReady ? "Ready" : dbLoaded ? "Loaded (not ready)" : "Not loaded");
             ImGuiComponents.HelpMarker("Dropbox enables inventory and trade helpers via /dbq commands.");
@@ -218,7 +219,7 @@ namespace VIWI.UI.Pages
             ImGui.PopFont();
 
             if (ImGui.IsItemHovered())
-                ImGui.SetTooltip("Warn character about Leve Allowances on Login");
+                ImGui.SetTooltip("Warn character about Leve Allowances on Login".T());
 
             for (int i = 0; i < rows.Count; i++)
             {
@@ -250,7 +251,7 @@ namespace VIWI.UI.Pages
                     module.SaveConfig();
                 }
                 if (ImGui.IsItemHovered())
-                    ImGui.SetTooltip("Warn character about Leve Allowances on Login");
+                    ImGui.SetTooltip("Warn character about Leve Allowances on Login".T());
 
                 // --- Delete column ---
                 ImGui.TableSetColumnIndex(2);
@@ -279,7 +280,7 @@ namespace VIWI.UI.Pages
                 ImGui.PopStyleColor(3);
 
                 if (ImGui.IsItemHovered())
-                    ImGui.SetTooltip("Delete this character entry from KitchenSink");
+                    ImGui.SetTooltip("Delete this character entry from KitchenSink".T());
 
                 ImGui.PopID();
             }
@@ -326,7 +327,7 @@ namespace VIWI.UI.Pages
             ImGui.PushID("WeaponIconsSettings");
 
             bool enabled = config.WeaponIconsEnabled;
-            if (ImGui.Checkbox("Enable Weapon Icons overlay", ref enabled))
+            if (ImGui.Checkbox("Enable Weapon Icons overlay".T(), ref enabled))
             {
                 config.WeaponIconsEnabled = enabled;
                 module.SaveConfig();
@@ -334,7 +335,7 @@ namespace VIWI.UI.Pages
             ImGuiComponents.HelpMarker("Draws job/role icons over Armoury Board item slots.");
 
             bool mini = config.WeaponIconsMiniMode;
-            if (ImGui.Checkbox("Mini mode (bottom-left icons)", ref mini))
+            if (ImGui.Checkbox("Mini mode (bottom-left icons)".T(), ref mini))
             {
                 config.WeaponIconsMiniMode = mini;
                 module.SaveConfig();
@@ -342,7 +343,7 @@ namespace VIWI.UI.Pages
             ImGuiComponents.HelpMarker("Draws smaller icons anchored to the bottom-left of each Armoury slot.");
 
             bool requireCtrl = config.WeaponIconsRequireCtrl;
-            if (ImGui.Checkbox("Require Ctrl key", ref requireCtrl))
+            if (ImGui.Checkbox("Require Ctrl key".T(), ref requireCtrl))
             {
                 config.WeaponIconsRequireCtrl = requireCtrl;
                 module.SaveConfig();
@@ -352,7 +353,7 @@ namespace VIWI.UI.Pages
         }
         private static void DrawCommandsCheatsheet()
         {
-            ImGui.TextUnformatted("Commands:");
+            ImGui.TextUnformatted("Commands:".T());
             ImGuiHelpers.ScaledDummy(4f);
 
             if (ImGui.BeginTable("KitchenSinkCommands", 2, ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.RowBg))

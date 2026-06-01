@@ -25,7 +25,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Content Include="VIWIJP.json" />
+	  <Content Include="VIWIJP.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	  <Content Include="VIWI.png">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
@@ -110,5 +112,30 @@
 	<ItemGroup>
 	  <PackageReference Include="Pictomancy" Version="0.0.5" />
 	</ItemGroup>
+
+	<!-- [VIWI-JP] Release ビルド時に C:\DevPlugins\VIWIJP\ へ自動デプロイ。
+	     パスは MSBuild プロパティで上書き可能（他環境では /p:DevPluginsDir=... を指定）。
+	     詳細は STAGE2_PLAN.md §5 参照。 -->
+	<PropertyGroup>
+		<DevPluginsDir Condition="'$(DevPluginsDir)' == ''">C:\DevPlugins\VIWIJP</DevPluginsDir>
+		<EnableDevPluginsDeploy Condition="'$(EnableDevPluginsDeploy)' == ''">true</EnableDevPluginsDeploy>
+	</PropertyGroup>
+	<Target Name="DeployToDevPlugins" AfterTargets="Build"
+	        Condition="'$(Configuration)' == 'Release' And '$(EnableDevPluginsDeploy)' == 'true'">
+		<ItemGroup>
+			<_DeployFiles Include="$(OutputPath)VIWIJP.dll" />
+			<_DeployFiles Include="$(OutputPath)VIWIJP.json" />
+			<_DeployFiles Include="$(OutputPath)VIWIJP.deps.json" />
+			<_DeployFiles Include="$(OutputPath)VIWI.png" />
+			<_DeployFiles Include="$(OutputPath)ECommons.dll" />
+			<_DeployFiles Include="$(OutputPath)Pictomancy.dll" />
+			<_DeployFiles Include="$(OutputPath)SharpDX*.dll" />
+			<_DeployLocFiles Include="$(OutputPath)Localization\ja.json" />
+		</ItemGroup>
+		<MakeDir Directories="$(DevPluginsDir);$(DevPluginsDir)\Localization" />
+		<Copy SourceFiles="@(_DeployFiles)" DestinationFolder="$(DevPluginsDir)" SkipUnchangedFiles="true" />
+		<Copy SourceFiles="@(_DeployLocFiles)" DestinationFolder="$(DevPluginsDir)\Localization" SkipUnchangedFiles="true" />
+		<Message Importance="high" Text="[VIWI-JP] Deployed to $(DevPluginsDir)" />
+	</Target>
 
 </Project>

@@ -11,6 +11,7 @@ using System.Linq;
 using System.Numerics;
 using VIWI.Core;
 using VIWI.UI.Pages;
+using VIWI.Localization;
 
 namespace VIWI.UI.Windows
 {
@@ -237,7 +238,7 @@ namespace VIWI.UI.Windows
                 ImGui.PopStyleColor();
 
             if (ImGui.IsItemHovered())
-                ImGui.SetTooltip("Press Enter to submit.");
+                ImGui.SetTooltip("Press Enter to submit.".T());
             if (!string.IsNullOrEmpty(_passkeyStatus) && ImGui.IsItemActive() && ImGui.IsItemEdited())
             {
                 _passkeyStatus = string.Empty;
@@ -275,7 +276,7 @@ namespace VIWI.UI.Windows
                 }
             }
             //For Testing
-            /*if (_config.FeaturesUnlocked && ImGui.Button("Lock"))
+            /*if (_config.FeaturesUnlocked && ImGui.Button("Lock".T()))
             {
                 _config.FeaturesUnlocked = false;
                 _config.Save();

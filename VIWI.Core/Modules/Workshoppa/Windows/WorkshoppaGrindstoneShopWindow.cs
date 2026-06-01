@@ -9,6 +9,7 @@ using VIWI.Core;
 using VIWI.Helpers;
 using VIWI.Modules.Workshoppa.External;
 using VIWI.Modules.Workshoppa.Windows.Shop;
+using VIWI.Localization;
 
 namespace VIWI.Modules.Workshoppa.Windows;
 
@@ -124,13 +125,13 @@ internal sealed unsafe class WorkshoppaGrindstoneShopWindow : WorkshoppaShopWind
             {
                 if (Shop.ItemForSale == null)
                 {
-                    ImGui.Text("Processing purchase...");
+                    ImGui.Text("Processing purchase...".T());
                     if (ImGuiComponents.IconButtonWithText(FontAwesomeIcon.Times, "Cancel Auto-Buy"))
                         Shop.CancelAutoPurchase();
                     return;
                 }
 
-                ImGui.Text("Grindstone");
+                ImGui.Text("Grindstone".T());
                 ImGuiComponents.HelpMarker("This complements Workshoppa's experimental leveling feature that will\n" +
                     "repeatedly start and discontinue projects while turning in items to level classes\n\n" +
                     "This only requires you to be at least the minimum level shown in config to start,\n" +
@@ -157,7 +158,7 @@ internal sealed unsafe class WorkshoppaGrindstoneShopWindow : WorkshoppaShopWind
         int owned = Shop.GetItemCount(activeItemId);
         int freeInventorySlots = Shop.CountFreeInventorySlots();
 
-        ImGui.Text("Grindstone");
+        ImGui.Text("Grindstone".T());
         ImGuiComponents.HelpMarker("This complements Workshoppa's experimental leveling feature that will\n" +
             "repeatedly start and discontinue projects while turning in items to level classes\n\n" +
             "This only requires you to be at least the minimum level shown in config to start,\n" +
@@ -206,7 +207,7 @@ internal sealed unsafe class WorkshoppaGrindstoneShopWindow : WorkshoppaShopWind
                 _target = VendorTarget.Mudstone;
 
             ImGui.TableNextColumn();
-            ImGui.TextUnformatted("Mudstone (MIN)");
+            ImGui.TextUnformatted("Mudstone (MIN)".T());
 
             // Elm row
             ImGui.TableNextRow();
@@ -234,7 +235,7 @@ internal sealed unsafe class WorkshoppaGrindstoneShopWindow : WorkshoppaShopWind
                 _target = VendorTarget.ElmLumber;
 
             ImGui.TableNextColumn();
-            ImGui.TextUnformatted("Elm Lumber (CRP)");
+            ImGui.TextUnformatted("Elm Lumber (CRP)".T());
 
             ImGui.EndTable();
         }
@@ -290,7 +291,7 @@ internal sealed unsafe class WorkshoppaGrindstoneShopWindow : WorkshoppaShopWind
         }
 
         bool tpToWS = _config.TeleToWorkshop;
-        if (ImGui.Checkbox("Teleport to Workshop after purchase.", ref tpToWS))
+        if (ImGui.Checkbox("Teleport to Workshop after purchase.".T(), ref tpToWS))
         {
             _config.TeleToWorkshop = tpToWS;
             WorkshoppaModule.Instance?.SaveConfig();
@@ -369,13 +370,13 @@ internal sealed unsafe class WorkshoppaGrindstoneShopWindow : WorkshoppaShopWind
     {
         if (!IsOpen || Shop.ItemForSale == null)
         {
-            _chatGui.PrintError("Could not start purchase, shop window is not open.");
+            _chatGui.PrintError("Could not start purchase, shop window is not open.".T());
             return;
         }
 
         if (quantity <= 0)
         {
-            _chatGui.Print("Not buying item, you already have enough.");
+            _chatGui.Print("Not buying item, you already have enough.".T());
             return;
         }
 

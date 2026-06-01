@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using VIWI.IPC;
+using VIWI.Localization;
 
 namespace VIWI.Modules.KitchenSink.Commands;
 
@@ -115,7 +116,7 @@ internal sealed class CharacterSwitch : IDisposable
             if (!_autoRetainer.Ready)
             {
                 if (showError)
-                    _chatGui.PrintError("[KitchenSink] AutoRetainer not ready.", null, null);
+                    _chatGui.PrintError("[KitchenSink] AutoRetainer not ready.".T(), null, null);
                 return null;
             }
 
@@ -123,7 +124,7 @@ internal sealed class CharacterSwitch : IDisposable
             if (regChars == null || regChars.Count == 0)
             {
                 if (showError)
-                    _chatGui.PrintError("[KitchenSink] AutoRetainer returned 0 registered characters.", null, null);
+                    _chatGui.PrintError("[KitchenSink] AutoRetainer returned 0 registered characters.".T(), null, null);
                 return null;
             }
 
@@ -131,7 +132,7 @@ internal sealed class CharacterSwitch : IDisposable
             if (startIdx < 0)
             {
                 if (showError)
-                    _chatGui.PrintError("[KitchenSink] Current CID not found in AutoRetainer list.", null, null);
+                    _chatGui.PrintError("[KitchenSink] Current CID not found in AutoRetainer list.".T(), null, null);
                 return null;
             }
 
@@ -150,7 +151,7 @@ internal sealed class CharacterSwitch : IDisposable
                 if (info.CID == _playerState.ContentId)
                 {
                     if (showError)
-                        _chatGui.PrintError("[KitchenSink] No character to switch to found.", null, null);
+                        _chatGui.PrintError("[KitchenSink] No character to switch to found.".T(), null, null);
                     return null;
                 }
                 if (info.ExcludeRetainer && info.ExcludeWorkshop)
@@ -163,7 +164,7 @@ internal sealed class CharacterSwitch : IDisposable
             }
 
             if (showError)
-                _chatGui.PrintError("[KitchenSink] No character to switch to found.", null, null);
+                _chatGui.PrintError("[KitchenSink] No character to switch to found.".T(), null, null);
 
             return null;
         }
@@ -171,7 +172,7 @@ internal sealed class CharacterSwitch : IDisposable
         {
             _pluginLog.Error(ex, "[KitchenSink] FindCharacter failed");
             if (showError)
-                _chatGui.PrintError("[KitchenSink] FindCharacter failed (see log).", null, null);
+                _chatGui.PrintError("[KitchenSink] FindCharacter failed (see log).".T(), null, null);
             return null;
         }
     }
@@ -181,7 +182,7 @@ internal sealed class CharacterSwitch : IDisposable
     {
         if (string.IsNullOrWhiteSpace(arguments))
         {
-            _chatGui.PrintError("[KitchenSink] Usage: /ks <world/name> [index]", null, null);
+            _chatGui.PrintError("[KitchenSink] Usage: /ks <world/name> [index]".T(), null, null);
             return;
         }
 
@@ -190,7 +191,7 @@ internal sealed class CharacterSwitch : IDisposable
             var cids = _autoRetainer.GetRegisteredCIDs();
             if (cids.Count == 0)
             {
-                _chatGui.PrintError("[KitchenSink] AutoRetainer not ready or returned no registered characters.", null, null);
+                _chatGui.PrintError("[KitchenSink] AutoRetainer not ready or returned no registered characters.".T(), null, null);
                 return;
             }
 
@@ -214,7 +215,7 @@ internal sealed class CharacterSwitch : IDisposable
 
             if (entries.Count == 0)
             {
-                _chatGui.PrintError("[KitchenSink] AutoRetainer returned no usable characters.", null, null);
+                _chatGui.PrintError("[KitchenSink] AutoRetainer returned no usable characters.".T(), null, null);
                 return;
             }
 
@@ -237,12 +238,12 @@ internal sealed class CharacterSwitch : IDisposable
         }
         catch (IpcError)
         {
-            _chatGui.PrintError("[KitchenSink] AutoRetainer IPC isn't available.", null, null);
+            _chatGui.PrintError("[KitchenSink] AutoRetainer IPC isn't available.".T(), null, null);
         }
         catch (Exception ex)
         {
             _pluginLog.Error(ex, "[KitchenSink] PickCharacter failed");
-            _chatGui.PrintError("[KitchenSink] PickCharacter failed (see logs).", null, null);
+            _chatGui.PrintError("[KitchenSink] PickCharacter failed (see logs).".T(), null, null);
         }
     }
 

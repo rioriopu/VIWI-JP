@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using System.Numerics;
 using VIWI.Core;
+using VIWI.Localization;
 
 namespace VIWI.UI.Pages
 {
@@ -26,7 +27,7 @@ namespace VIWI.UI.Pages
             // ---------------------------
             // Header
             // ---------------------------
-            ImGui.TextUnformatted("VIWI – Vera's Integrated World Improvements");
+            ImGui.TextUnformatted("VIWI – Vera's Integrated World Improvements".T());
             ImGui.TextUnformatted($"VIWI Version: {VIWIContext.PluginInterface.Manifest.AssemblyVersion}");
             ImGuiHelpers.ScaledDummy(4f);
             ImGui.Separator();
@@ -35,7 +36,7 @@ namespace VIWI.UI.Pages
             // ---------------------------
             // Character Details
             // ---------------------------
-            ImGui.TextUnformatted("Character Details:");
+            ImGui.TextUnformatted("Character Details:".T());
             ImGuiHelpers.ScaledDummy(4f);
  
             if (VIWIContext.ObjectTable.LocalPlayer != null)
@@ -102,7 +103,7 @@ namespace VIWI.UI.Pages
             // ---------------------------
             // System Info
             // ---------------------------
-            ImGui.TextUnformatted("System Info");
+            ImGui.TextUnformatted("System Info".T());
             ImGuiHelpers.ScaledDummy(4f);
 
             var time = System.DateTime.Now;
@@ -128,7 +129,7 @@ namespace VIWI.UI.Pages
             // ---------------------------
             // Loaded Modules
             // ---------------------------
-            ImGui.TextUnformatted("Loaded Modules");
+            ImGui.TextUnformatted("Loaded Modules".T());
             ImGuiHelpers.ScaledDummy(4f);
 
             var remaining = ImGui.GetContentRegionAvail().Y;

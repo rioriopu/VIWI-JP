@@ -6,6 +6,7 @@ using System;
 using System.Numerics;
 using VIWI.Modules.Workshoppa.External;
 using VIWI.Helpers;
+using VIWI.Localization;
 
 namespace VIWI.Modules.Workshoppa.Windows.Shop;
 
@@ -108,10 +109,10 @@ internal abstract unsafe class WorkshoppaShopWindowBase : Window, IDisposable
     /* REVISIT LATER IDK
     protected void DrawFollowControls()
     {
-        ImGui.Checkbox("Follow shop window", ref followAddon);
+        ImGui.Checkbox("Follow shop window".T(), ref followAddon);
 
         ImGui.SameLine();
-        if (ImGui.Button("Reset position"))
+        if (ImGui.Button("Reset position".T()))
         {
             FollowAddon = true;
             Position = new Vector2(100, 100);

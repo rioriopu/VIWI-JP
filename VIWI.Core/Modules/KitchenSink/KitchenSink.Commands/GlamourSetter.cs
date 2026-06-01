@@ -17,6 +17,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Numerics;
 using Cabinet = Lumina.Excel.Sheets.Cabinet;
+using VIWI.Localization;
 
 namespace VIWI.Modules.KitchenSink.Commands;
 
@@ -216,13 +217,13 @@ internal sealed class GlamourSetter : Window, IDisposable
     {
         if (_character == null)
         {
-            ImGui.TextUnformatted("You are not logged in.");
+            ImGui.TextUnformatted("You are not logged in.".T());
             return;
         }
 
         if (!_character.IsGlamourDresserInitialized)
         {
-            ImGui.TextUnformatted("Please access your glamour dresser.");
+            ImGui.TextUnformatted("Please access your glamour dresser.".T());
             return;
         }
 
@@ -236,7 +237,7 @@ internal sealed class GlamourSetter : Window, IDisposable
         ImGui.TextUnformatted($"Space saved: {ownedSets.Sum(s => s.Items.Count - 1)} items");
 
         var showMissingOnly = _cfg.ShowOnlyMissingGlamourSets;
-        if (ImGui.Checkbox("Show missing only", ref showMissingOnly))
+        if (ImGui.Checkbox("Show missing only".T(), ref showMissingOnly))
         {
             _cfg.ShowOnlyMissingGlamourSets = showMissingOnly;
             _save();

@@ -9,6 +9,7 @@ using System;
 using VIWI.Modules.Workshoppa.External;
 using VIWI.Modules.Workshoppa.Windows.Shop;
 using VIWI.Helpers;
+using VIWI.Localization;
 
 namespace VIWI.Modules.Workshoppa.Windows;
 
@@ -104,7 +105,7 @@ internal sealed unsafe class WorkshoppaRepairKitWindow : WorkshoppaShopWindowBas
 
         var item = Shop.ItemForSale.Value;
 
-        ImGui.Text("Inventory");
+        ImGui.Text("Inventory".T());
         ImGui.Indent();
         ImGui.Text($"Dark Matter Clusters: {darkMatterClusters:N0}");
         ImGui.Text($"Grade 6 Dark Matter: {item.OwnedItems:N0}");

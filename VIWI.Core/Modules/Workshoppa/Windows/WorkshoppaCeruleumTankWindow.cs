@@ -8,6 +8,7 @@ using System.Linq;
 using VIWI.Helpers;
 using VIWI.Modules.Workshoppa.External;
 using VIWI.Modules.Workshoppa.Windows.Shop; // ShopItemForSale
+using VIWI.Localization;
 
 namespace VIWI.Modules.Workshoppa.Windows;
 
@@ -98,7 +99,7 @@ internal sealed unsafe class WorkshoppaCeruleumTankWindow : WorkshoppaShopWindow
         int ceruleumTanks = Shop.GetItemCount(CeruleumTankItemId);
         int freeInventorySlots = Shop.CountFreeInventorySlots();
 
-        ImGui.Text("Inventory");
+        ImGui.Text("Inventory".T());
         ImGui.Indent();
         ImGui.Text($"Ceruleum Tanks: {FormatStackCount(ceruleumTanks)}");
         ImGui.Text($"Free Slots: {freeInventorySlots}");
@@ -219,13 +220,13 @@ internal sealed unsafe class WorkshoppaCeruleumTankWindow : WorkshoppaShopWindow
     {
         if (!IsOpen || Shop.ItemForSale == null)
         {
-            _chatGui.PrintError("Could not start purchase, shop window is not open.");
+            _chatGui.PrintError("Could not start purchase, shop window is not open.".T());
             return;
         }
 
         if (quantity <= 0)
         {
-            _chatGui.Print("Not buying ceruleum tanks, you already have enough.");
+            _chatGui.Print("Not buying ceruleum tanks, you already have enough.".T());
             return;
         }
 

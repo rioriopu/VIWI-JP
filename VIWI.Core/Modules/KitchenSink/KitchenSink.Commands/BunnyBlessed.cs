@@ -11,6 +11,7 @@ using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using Pictomancy;
+using VIWI.Localization;
 
 namespace VIWI.Modules.KitchenSink.Commands;
 
@@ -75,7 +76,7 @@ internal sealed class BunnyBlessed : IDisposable
 	private void ProcessCommand(string command, string arguments)
 	{
 		_enabled = !_enabled;
-		_chatGui.Print("Bunny locations are now " + (_enabled ? "marked" : "disabled") + ".", (string?)null, (ushort?)null);
+		_chatGui.Print("Bunny locations are now ".T() + (_enabled ? "marked" : "disabled") + ".", (string?)null, (ushort?)null);
 		OnTerritoryChanged(_clientState.TerritoryType);
 	}
 

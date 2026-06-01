@@ -2,6 +2,7 @@ using Dalamud.Game.Addon.Lifecycle;
 using Dalamud.Game.Addon.Lifecycle.AddonArgTypes;
 using Dalamud.Plugin.Services;
 using ECommons.Configuration;
+using VIWI.Localization;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.UI;
 using FFXIVClientStructs.FFXIV.Component.GUI;
@@ -205,7 +206,7 @@ internal sealed partial class WorkshoppaModule
 
         if (_configuration.Mode == TurnInMode.Leveling && AllLevelingTargetsDisabled())
         {
-            ChatGui.Print("[Workshoppa] All leveling targets are complete/disabled. Closing Windows.");
+            ChatGui.Print("[Workshoppa] All leveling targets are complete/disabled. Closing Windows.".T());
             CurrentStage = Stage.CloseDeliveryMenu;
             _continueAt = DateTime.Now.AddSeconds(0.8);
             return;
@@ -281,7 +282,7 @@ internal sealed partial class WorkshoppaModule
 
             if (itemCount < item.ItemCountPerStep)
             {
-                ChatGui.PrintError($"[Workshoppa] Out of {SafeItemName(item.ItemName)} for this project; will continue with other enabled items.");
+                ChatGui.PrintError("[Workshoppa] Out of {0} for this project; will continue with other enabled items.".T().Tr(SafeItemName(item.ItemName)));
                 _turnins[item.ItemId].Exhausted = true;
                 _continueAt = DateTime.Now.AddSeconds(0.2);
                 return;
@@ -291,7 +292,7 @@ internal sealed partial class WorkshoppaModule
 
             if (_mergeAttempts >= MaxMergeAttempts)
             {
-                ChatGui.PrintError($"[Workshoppa] Couldn't auto-merge {SafeItemName(item.ItemName)} after {_mergeAttempts} attempts. Merge manually to continue.");
+                ChatGui.PrintError("[Workshoppa] Couldn't auto-merge {0} after {1} attempts. Merge manually to continue.".T().Tr(SafeItemName(item.ItemName), _mergeAttempts));
                 CurrentStage = Stage.RequestStop;
                 return;
             }
@@ -366,7 +367,7 @@ internal sealed partial class WorkshoppaModule
                 {
                     if (_reattempted == true)
                     {
-                        ChatGui.PrintError($"[Workshoppa] You don't have the needed {item.ItemCountPerStep}x {SafeItemName(item.ItemName)} to continue.");
+                        ChatGui.PrintError("[Workshoppa] You don't have the needed {0}x {1} to continue.".T().Tr(item.ItemCountPerStep, SafeItemName(item.ItemName)));
                         CurrentStage = Stage.RequestStop;
                         break;
                     }
@@ -382,7 +383,7 @@ internal sealed partial class WorkshoppaModule
 
                 if (_mergeAttempts >= MaxMergeAttempts)
                 {
-                    ChatGui.PrintError($"[Workshoppa] Couldn't auto-merge {SafeItemName(item.ItemName)} after {_mergeAttempts} attempts. Merge manually to continue.");
+                    ChatGui.PrintError("[Workshoppa] Couldn't auto-merge {0} after {1} attempts. Merge manually to continue.".T().Tr(SafeItemName(item.ItemName), _mergeAttempts));
                     CurrentStage = Stage.RequestStop;
                     break;
                 }
@@ -483,7 +484,7 @@ internal sealed partial class WorkshoppaModule
 
         if (AllLevelingTargetsDisabled())
         {
-            ChatGui.Print("[Workshoppa] All leveling targets are complete/disabled. Closing Windows.");
+            ChatGui.Print("[Workshoppa] All leveling targets are complete/disabled. Closing Windows.".T());
             SaveConfig();
             _contributingItemId = null;
             CurrentStage = Stage.CloseDeliveryMenu;

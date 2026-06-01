@@ -17,6 +17,7 @@ using System.Text.RegularExpressions;
 using VIWI.Core;
 using VIWI.Modules.Workshoppa.GameData;
 using VIWI.UI.Pages;
+using VIWI.Localization;
 using static VIWI.Modules.Workshoppa.WorkshoppaConfig;
 
 namespace VIWI.Modules.Workshoppa.Windows;
@@ -98,7 +99,7 @@ internal sealed class WorkshoppaWindow : Window
         if (currentItem != null)
         {
             var currentCraft = _workshopCache.Crafts.Single(x => x.WorkshopItemId == currentItem.WorkshopItemId);
-            ImGui.Text("Currently Crafting:");
+            ImGui.Text("Currently Crafting:".T());
 
             IDalamudTextureWrap? icon = _iconCache.GetIcon(currentCraft.IconId);
             if (icon != null)
@@ -151,7 +152,7 @@ internal sealed class WorkshoppaWindow : Window
                 ImGui.EndDisabled();
 
                 if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled) && !keysHeld)
-                    ImGui.SetTooltip("Hold CTRL+SHIFT to remove this as craft. You have to manually use the fabrication station to cancel or finish the workshop project before you can continue using the queue.");
+                    ImGui.SetTooltip("Hold CTRL+SHIFT to remove this as craft. You have to manually use the fabrication station to cancel or finish the workshop project before you can continue using the queue.".T());
 
                 ShowErrorConditions();
             }
@@ -165,7 +166,7 @@ internal sealed class WorkshoppaWindow : Window
         }
         else
         {
-            ImGui.Text("Currently Crafting: ---");
+            ImGui.Text("Currently Crafting: ---".T());
 
             if (ImGuiComponents.IconButtonWithText(FontAwesomeIcon.Search, "Check Inventory"))
                 _checkInventory = !_checkInventory;
@@ -207,7 +208,7 @@ internal sealed class WorkshoppaWindow : Window
 
             ImGui.EndDisabled();
 
-            if (ImGui.Checkbox("Enable Grindstone", ref grindstoneEnabled))
+            if (ImGui.Checkbox("Enable Grindstone".T(), ref grindstoneEnabled))
             {
                 _module._configuration.Mode = grindstoneEnabled ? WorkshoppaConfig.TurnInMode.Leveling : WorkshoppaConfig.TurnInMode.Normal;
 
@@ -247,7 +248,7 @@ internal sealed class WorkshoppaWindow : Window
         }
         else
         {
-            ImGui.Text("Queue:");
+            ImGui.Text("Queue:".T());
             ImGui.BeginDisabled(_module.CurrentStage != Stage.Stopped);
 
             WorkshoppaConfig.QueuedItem? itemToRemove = null;
@@ -363,7 +364,7 @@ internal sealed class WorkshoppaWindow : Window
         if (_config.Presets.Count == 0)
         {
             ImGui.BeginDisabled();
-            ImGui.MenuItem("Import Queue from Preset");
+            ImGui.MenuItem("Import Queue from Preset".T());
             ImGui.EndDisabled();
         }
         else if (ImGui.BeginMenu("Import Queue from Preset"))
@@ -393,7 +394,7 @@ internal sealed class WorkshoppaWindow : Window
         if (_config.ItemQueue.Count == 0)
         {
             ImGui.BeginDisabled();
-            ImGui.MenuItem("Export Queue to Preset");
+            ImGui.MenuItem("Export Queue to Preset".T());
             ImGui.EndDisabled();
         }
         else if (ImGui.BeginMenu("Export Queue to Preset"))
@@ -426,7 +427,7 @@ internal sealed class WorkshoppaWindow : Window
         if (_config.Presets.Count == 0)
         {
             ImGui.BeginDisabled();
-            ImGui.MenuItem("Delete Preset");
+            ImGui.MenuItem("Delete Preset".T());
             ImGui.EndDisabled();
         }
         else if (ImGui.BeginMenu("Delete Preset"))
@@ -483,7 +484,7 @@ internal sealed class WorkshoppaWindow : Window
         }
 
         ImGui.BeginDisabled(fromClipboardItems.Count == 0);
-        if (ImGui.MenuItem("Import Queue from Clipboard"))
+        if (ImGui.MenuItem("Import Queue from Clipboard".T()))
         {
             foreach (var item in fromClipboardItems)
             {
@@ -500,27 +501,27 @@ internal sealed class WorkshoppaWindow : Window
         ImGui.EndDisabled();
 
         ImGui.BeginDisabled(_config.ItemQueue.Count == 0);
-        if (ImGui.MenuItem("Export Queue to Clipboard"))
+        if (ImGui.MenuItem("Export Queue to Clipboard".T()))
         {
             var lines = _config.ItemQueue
                 .Select(x => new { Name = _workshopCache.Crafts.Single(y => x.WorkshopItemId == y.WorkshopItemId).Name, x.Quantity })
                 .Select(x => $"{x.Quantity}x {x.Name}");
             ImGui.SetClipboardText(string.Join(Environment.NewLine, lines));
-            _chatGui.Print("Copied queue content to clipboard.");
+            _chatGui.Print("Copied queue content to clipboard.".T());
         }
 
-        if (ImGui.MenuItem("Export Material List to Clipboard"))
+        if (ImGui.MenuItem("Export Material List to Clipboard".T()))
         {
             var mats = _recipeTree.ResolveRecipes(GetMaterialList()).Where(x => x.Type == Ingredient.EType.Craftable);
             ImGui.SetClipboardText(string.Join(Environment.NewLine, mats.Select(x => $"{x.TotalQuantity}x {x.Name}")));
-            _chatGui.Print("Copied material list to clipboard.");
+            _chatGui.Print("Copied material list to clipboard.".T());
         }
 
-        if (ImGui.MenuItem("Export Gathered/Venture materials to Clipboard"))
+        if (ImGui.MenuItem("Export Gathered/Venture materials to Clipboard".T()))
         {
             var mats = _recipeTree.ResolveRecipes(GetMaterialList()).Where(x => x.Type == Ingredient.EType.Gatherable);
             ImGui.SetClipboardText(string.Join(Environment.NewLine, mats.Select(x => $"{x.TotalQuantity}x {x.Name}")));
-            _chatGui.Print("Copied material list to clipboard.");
+            _chatGui.Print("Copied material list to clipboard.".T());
         }
 
         ImGui.EndDisabled();
@@ -540,7 +541,7 @@ internal sealed class WorkshoppaWindow : Window
 
     private unsafe void CheckMaterial()
     {
-        ImGui.Text("Items needed for all crafts in queue:");
+        ImGui.Text("Items needed for all crafts in queue:".T());
         var items = GetMaterialList();
 
         ImGui.Indent(20);
@@ -665,7 +666,7 @@ internal sealed class WorkshoppaWindow : Window
         double estimatedSeconds = (totalTurnins / 3.0) * secondsPerSetOfThreeTurnins;
         var eta = TimeSpan.FromSeconds(estimatedSeconds);
 
-        ImGui.Text("Leveling Materials:");
+        ImGui.Text("Leveling Materials:".T());
         ImGui.Indent(20);
 
         DrawIfAny("Elm Lumber", elmLumber, elmTurnins);

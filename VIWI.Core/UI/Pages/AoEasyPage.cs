@@ -4,6 +4,7 @@ using ECommons.ImGuiMethods;
 using System.Numerics;
 using VIWI.Helpers;
 using VIWI.Modules.AoEasy;
+using VIWI.Localization;
 
 namespace VIWI.UI.Pages
 {
@@ -37,7 +38,7 @@ namespace VIWI.UI.Pages
             ImGui.TextUnformatted($"AoEasy - V{Version}");
             ImGui.SameLine();
             ImGui.TextColored(GradientColor.Get(ImGuiHelper.RainbowColorStart, ImGuiHelper.RainbowColorEnd, 500), "Stop Running Away From Me!");
-            ImGui.TextUnformatted("Enabled:");
+            ImGui.TextUnformatted("Enabled:".T());
             ImGui.SameLine();
             ImGui.TextColored(
                 config.Enabled ? new Vector4(0.3f, 1f, 0.3f, 1f) : new Vector4(1f, 0.3f, 0.3f, 1f),
@@ -47,7 +48,7 @@ namespace VIWI.UI.Pages
             ImGui.Separator();
 
             ImGuiHelpers.ScaledDummy(8f);
-            ImGui.TextUnformatted("Description:");
+            ImGui.TextUnformatted("Description:".T());
             ImGuiHelpers.ScaledDummy(4f);
             ImGui.TextWrapped(
                 "STILL IN DEVELOPMENT!!!"

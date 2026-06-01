@@ -12,6 +12,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
+using VIWI.Localization;
 
 namespace VIWI.Modules.KitchenSink.Commands;
 
@@ -182,7 +183,7 @@ internal sealed class DropboxQueue : IDisposable
     {
         if (string.IsNullOrEmpty(arguments))
         {
-            _chatGui.PrintError("Usage: /dbq request item1:qty1 item2:qty2 [...]", null, null);
+            _chatGui.PrintError("Usage: /dbq request item1:qty1 item2:qty2 [...]".T(), null, null);
             return;
         }
 
@@ -211,7 +212,7 @@ internal sealed class DropboxQueue : IDisposable
 
         if (needed.Count == 0)
         {
-            _chatGui.Print("No items need to be filled", null, null);
+            _chatGui.Print("No items need to be filled".T(), null, null);
         }
         else
         {
@@ -288,12 +289,12 @@ internal sealed class DropboxQueue : IDisposable
 			select x.Item1).ToList();
 		if (list2.Count == 1)
 		{
-			_chatGui.PrintError("dbq: " + list2.First(), (string?)null, (ushort?)null);
+			_chatGui.PrintError("dbq: ".T() + list2.First(), (string?)null, (ushort?)null);
 			return null;
 		}
 		if (list2.Count >= 2)
 		{
-			_chatGui.PrintError("dbq: Multiple errors occured:", (string?)null, (ushort?)null);
+			_chatGui.PrintError("dbq: Multiple errors occured:".T(), (string?)null, (ushort?)null);
 			foreach (string item in list2)
 			{
 				_chatGui.PrintError(" - " + item, (string?)null, (ushort?)null);

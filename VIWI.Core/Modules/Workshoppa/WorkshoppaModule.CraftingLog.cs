@@ -3,6 +3,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 using System;
 using System.Linq;
 using VIWI.Helpers;
+using VIWI.Localization;
 using static VIWI.Core.VIWIContext;
 using static VIWI.Modules.Workshoppa.WorkshoppaConfig;
 
@@ -70,7 +71,7 @@ internal sealed partial class WorkshoppaModule
 
         if (!TryGetCurrentCraft(out var craft))
         {
-            ChatGui.PrintError("[Workshoppa] Current craft was not found in WorkshopCache. Stopping.");
+            ChatGui.PrintError("[Workshoppa] Current craft was not found in WorkshopCache. Stopping.".T());
             PluginLog.Error("[Workshoppa] TryGetCurrentCraft failed in SelectCraftCategory.");
             CurrentStage = Stage.RequestStop;
             return;
@@ -94,7 +95,7 @@ internal sealed partial class WorkshoppaModule
         }
         catch (Exception ex)
         {
-            ChatGui.PrintError("[Workshoppa] That workshop category/type appears to be unavailable (likely not unlocked?). Stopping.");
+            ChatGui.PrintError("[Workshoppa] That workshop category/type appears to be unavailable (likely not unlocked?). Stopping.".T());
             PluginLog.Error(ex, $"[Workshoppa] FireCallback failed for {craft.Name}, Category={craft.Category} Type={craft.Type}.");
             CurrentStage = Stage.RequestStop;
             _continueAt = DateTime.Now.AddSeconds(0.5);
@@ -113,7 +114,7 @@ internal sealed partial class WorkshoppaModule
 
         if (!TryGetCurrentCraft(out var craft))
         {
-            ChatGui.PrintError("[Workshoppa] Current craft was not found in WorkshopCache. Stopping.");
+            ChatGui.PrintError("[Workshoppa] Current craft was not found in WorkshopCache. Stopping.".T());
             PluginLog.Error("[Workshoppa] TryGetCurrentCraft failed in SelectCraft.");
             CurrentStage = Stage.RequestStop;
             return;
@@ -154,7 +155,7 @@ internal sealed partial class WorkshoppaModule
         }
         catch (Exception ex)
         {
-            ChatGui.PrintError("[Workshoppa] That workshop craft appears to be unavailable (likely not unlocked?). Stopping.");
+            ChatGui.PrintError("[Workshoppa] That workshop craft appears to be unavailable (likely not unlocked?). Stopping.".T());
             PluginLog.Error(ex, $"[Workshoppa] FireCallback failed for {craft.Name}, Category={craft.Category} Type={craft.Type}.");
             CurrentStage = Stage.RequestStop;
             _continueAt = DateTime.Now.AddSeconds(0.5);

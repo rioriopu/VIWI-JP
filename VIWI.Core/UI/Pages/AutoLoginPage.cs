@@ -10,6 +10,7 @@ using System.Numerics;
 using VIWI.Core;
 using VIWI.Helpers;
 using VIWI.Modules.AutoLogin;
+using VIWI.Localization;
 
 namespace VIWI.UI.Pages
 {
@@ -45,7 +46,7 @@ namespace VIWI.UI.Pages
             ImGui.SameLine();
             ImGui.TextColored(GradientColor.Get(ImGuiHelper.RainbowColorStart, ImGuiHelper.RainbowColorEnd, 500), "DDoS Begone!");
 
-            ImGui.TextUnformatted("Enabled:");
+            ImGui.TextUnformatted("Enabled:".T());
             ImGui.SameLine();
             ImGui.TextColored(
                 config.Enabled ? new Vector4(0.3f, 1f, 0.3f, 1f) : new Vector4(1f, 0.3f, 0.3f, 1f),
@@ -56,7 +57,7 @@ namespace VIWI.UI.Pages
             ImGui.Separator();
             ImGuiHelpers.ScaledDummy(8f);
 
-            ImGui.TextUnformatted("Description:");
+            ImGui.TextUnformatted("Description:".T());
             ImGuiHelpers.ScaledDummy(4f);
             ImGui.TextWrapped(
                 "AutoLogin is an Anti-DDoS module that will store the details of your last-known active character " +
@@ -100,7 +101,7 @@ namespace VIWI.UI.Pages
             ImGui.Separator();
             ImGuiHelpers.ScaledDummy(8f);
 
-            ImGui.TextUnformatted("Most Recent Character Per Region:");
+            ImGui.TextUnformatted("Most Recent Character Per Region:".T());
             ImGuiHelpers.ScaledDummy(4f);
 
             DrawRegionRow(config, LoginRegion.NA);
@@ -109,13 +110,13 @@ namespace VIWI.UI.Pages
             DrawRegionRow(config, LoginRegion.JP);
 
             bool ql = config.QuickLaunchEnabled;
-            if (ImGui.Checkbox("Enable QuickLaunch Menu (Title Screen)", ref ql))
+            if (ImGui.Checkbox("Enable QuickLaunch Menu (Title Screen)".T(), ref ql))
             {
                 config.QuickLaunchEnabled = ql;
                 module?.SaveConfig();
             }
             bool lol = config.LoginOnLaunch;
-            if (ImGui.Checkbox("Login On Game Launch", ref lol))
+            if (ImGui.Checkbox("Login On Game Launch".T(), ref lol))
             {
                 config.LoginOnLaunch = lol;
                 module?.SaveConfig();
@@ -137,7 +138,7 @@ namespace VIWI.UI.Pages
             ImGuiHelpers.ScaledDummy(4f);
 
             bool skipAuth = config.SkipAuthError;
-            if (ImGui.Checkbox("Restart on Auth Error", ref skipAuth))
+            if (ImGui.Checkbox("Restart on Auth Error".T(), ref skipAuth))
             {
                 config.SkipAuthError = skipAuth;
                 module?.SaveConfig();
@@ -155,7 +156,7 @@ namespace VIWI.UI.Pages
             bool canRestart = config.SkipAuthError && !string.IsNullOrWhiteSpace(_launchPathBuf);
             using (ImRaii.Disabled(!canRestart))
             {
-                if (ImGui.Button("Restart Client"))
+                if (ImGui.Button("Restart Client".T()))
                 {
                     config.ClientLaunchPath = _launchPathBuf;
                     config.ClientLaunchArgs = _launchArgsBuf;
@@ -168,7 +169,7 @@ namespace VIWI.UI.Pages
             using (ImRaii.Disabled(!canRestart))
             {
                 bool lor = config.LoginOnRestart;
-                if (ImGui.Checkbox("Login On Auth Relaunch", ref lor))
+                if (ImGui.Checkbox("Login On Auth Relaunch".T(), ref lor))
                 {
                     config.LoginOnRestart = lor;
                     module?.SaveConfig();
@@ -184,7 +185,7 @@ namespace VIWI.UI.Pages
 
             (string statusText, Vector4 statusColor) = ValidateLaunchSettings(_launchPathBuf, _launchArgsBuf, skipAuth);
 
-            ImGui.TextUnformatted("Status:");
+            ImGui.TextUnformatted("Status:".T());
             ImGui.SameLine();
             ImGui.TextColored(statusColor, statusText);
 
@@ -192,7 +193,7 @@ namespace VIWI.UI.Pages
 
             using (ImRaii.Disabled(!skipAuth))
             {
-                ImGui.Text("Launch Path:");
+                ImGui.Text("Launch Path:".T());
                 ImGui.SetNextItemWidth(-1);
                 ImGui.InputTextWithHint(
                     "##client_launch_path",
@@ -207,7 +208,7 @@ namespace VIWI.UI.Pages
                     module?.SaveConfig();
                 }
 
-                ImGui.Text("Launch Arguments:");
+                ImGui.Text("Launch Arguments:".T());
                 ImGui.SetNextItemWidth(-1);
                 ImGui.InputTextWithHint(
                     "##client_launch_args",
@@ -230,11 +231,11 @@ namespace VIWI.UI.Pages
             ImGui.Separator();
             ImGuiHelpers.ScaledDummy(8f);
 
-            ImGui.TextUnformatted("Login Chat Commands");
+            ImGui.TextUnformatted("Login Chat Commands".T());
             ImGuiHelpers.ScaledDummy(4f);
 
             bool runLoginCommands = config.RunLoginCommands;
-            if (ImGui.Checkbox("Run commands after successful disconnect recovery", ref runLoginCommands))
+            if (ImGui.Checkbox("Run commands after successful disconnect recovery".T(), ref runLoginCommands))
             {
                 config.RunLoginCommands = runLoginCommands;
                 module?.SaveConfig();
@@ -245,7 +246,7 @@ namespace VIWI.UI.Pages
             );
 
             bool skipWhenAR = config.ARActiveSkipLoginCommands;
-            if (ImGui.Checkbox("Skip login commands when AutoRetainer is active", ref skipWhenAR))
+            if (ImGui.Checkbox("Skip login commands when AutoRetainer is active".T(), ref skipWhenAR))
             {
                 config.ARActiveSkipLoginCommands = skipWhenAR;
                 module?.SaveConfig();
@@ -392,7 +393,7 @@ namespace VIWI.UI.Pages
                 ImGui.PushStyleColor(ImGuiCol.ButtonHovered, colHovered);
                 ImGui.PushStyleColor(ImGuiCol.ButtonActive, colActive);
 
-                if (ImGui.Button("Debug", new Vector2(toggleWidth, 0)))
+                if (ImGui.Button("Debug".T(), new Vector2(toggleWidth, 0)))
                 {
                     debugEnabled = !debugEnabled;
 

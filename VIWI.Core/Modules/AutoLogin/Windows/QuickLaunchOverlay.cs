@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Numerics;
 using VIWI.Helpers;
+using VIWI.Localization;
 using static VIWI.Core.VIWIContext;
 
 namespace VIWI.Modules.AutoLogin.Windows
@@ -112,7 +113,7 @@ namespace VIWI.Modules.AutoLogin.Windows
                 float fullWidth = ImGui.GetContentRegionAvail().X;
                 float height = ImGui.GetFrameHeight() * 1.25f;
 
-                if (ImGui.Button("Stop AutoLogin", new Vector2(fullWidth, height)))
+                if (ImGui.Button("Stop AutoLogin".T(), new Vector2(fullWidth, height)))
                 {
                     module.StopAutoLogin();
                 }
@@ -196,12 +197,12 @@ namespace VIWI.Modules.AutoLogin.Windows
 
                     using (ImRaii.Disabled(!ctrlHeld))
                     {
-                        if (ImGui.Button("Restart Client", new Vector2(fullWidth, height)))
+                        if (ImGui.Button("Restart Client".T(), new Vector2(fullWidth, height)))
                             module.RequestClientRestart(config.CurrentRegion);
                     }
 
                     if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
-                        ImGui.SetTooltip("Hold CTRL while clicking to restart the client.");
+                        ImGui.SetTooltip("Hold CTRL while clicking to restart the client.".T());
                 }
             }
         }

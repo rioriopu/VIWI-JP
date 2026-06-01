@@ -8,6 +8,7 @@ using System.Numerics;
 using VIWI.Core;
 using VIWI.Helpers;
 using VIWI.Modules.Workshoppa;
+using VIWI.Localization;
 
 namespace VIWI.UI.Pages
 {
@@ -41,7 +42,7 @@ namespace VIWI.UI.Pages
             ImGui.TextUnformatted($"Workshoppa - V{Version}");
             ImGui.SameLine();
             ImGui.TextColored(GradientColor.Get(ImGuiHelper.RainbowColorStart, ImGuiHelper.RainbowColorEnd, 500), "Workshop Project Automation");
-            ImGui.TextUnformatted("Enabled:");
+            ImGui.TextUnformatted("Enabled:".T());
             ImGui.SameLine();
             ImGui.TextColored(
                 config.Enabled ? new Vector4(0.3f, 1f, 0.3f, 1f) : new Vector4(1f, 0.3f, 0.3f, 1f),
@@ -50,7 +51,7 @@ namespace VIWI.UI.Pages
             ImGuiHelpers.ScaledDummy(4f);
             ImGui.Separator();
             ImGuiHelpers.ScaledDummy(8f);
-            ImGui.TextUnformatted("Description:");
+            ImGui.TextUnformatted("Description:".T());
             ImGuiHelpers.ScaledDummy(4f);
             ImGui.TextWrapped(
                 "Workshoppa is a workshop project manager and automator originally created by Liza,\n" +
@@ -63,11 +64,11 @@ namespace VIWI.UI.Pages
             ImGui.Separator();
 
             ImGuiHelpers.ScaledDummy(8f);
-            ImGui.TextUnformatted("Settings");
+            ImGui.TextUnformatted("Settings".T());
             ImGuiHelpers.ScaledDummy(4f);
 
             bool enableRepair = config.EnableRepairKitCalculator;
-            if (ImGui.Checkbox("Enable Repair Kit Calculator", ref enableRepair))
+            if (ImGui.Checkbox("Enable Repair Kit Calculator".T(), ref enableRepair))
             {
                 config.EnableRepairKitCalculator = enableRepair;
                 WorkshoppaModule.Instance?.SaveConfig();
@@ -76,7 +77,7 @@ namespace VIWI.UI.Pages
                 "This is based off the CURRENT number of DarkMatterCLUSTERS you have in your inventory at a 5:1 ratio for crafting RepairKits.");
 
             bool enableTanks = config.EnableCeruleumTankCalculator;
-            if (ImGui.Checkbox("Enable Ceruleum Tank Calculator", ref enableTanks))
+            if (ImGui.Checkbox("Enable Ceruleum Tank Calculator".T(), ref enableTanks))
             {
                 config.EnableCeruleumTankCalculator = enableTanks;
                 WorkshoppaModule.Instance?.SaveConfig();
@@ -85,7 +86,7 @@ namespace VIWI.UI.Pages
                 "Just input how many stacks of fuel you would like to buy in the respective window.");
 
             bool enableMudstone = config.EnableGrindstoneShopCalculator;
-            if (ImGui.Checkbox("Enable Mudstone Calculator", ref enableMudstone))
+            if (ImGui.Checkbox("Enable Mudstone Calculator".T(), ref enableMudstone))
             {
                 config.EnableGrindstoneShopCalculator = enableMudstone;
                 WorkshoppaModule.Instance?.SaveConfig();
@@ -97,7 +98,7 @@ namespace VIWI.UI.Pages
             ImGui.Separator();
             ImGuiHelpers.ScaledDummy(8f);
 
-            ImGui.TextUnformatted("Grindstone Level Targets");
+            ImGui.TextUnformatted("Grindstone Level Targets".T());
             ImGui.SameLine();
             ImGuiComponents.HelpMarker("Set your Target level and ensure you have enough materials to reach it!!");
 
@@ -215,7 +216,7 @@ namespace VIWI.UI.Pages
             // ---------------------------
             ImGui.Separator();
             ImGuiHelpers.ScaledDummy(8f);
-            ImGui.TextUnformatted("Commands:");
+            ImGui.TextUnformatted("Commands:".T());
             ImGuiHelpers.ScaledDummy(4f);
 
             if (ImGui.BeginTable("WorkshoppaCommands", 2, ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.RowBg))
@@ -247,7 +248,7 @@ namespace VIWI.UI.Pages
             ImGui.Separator();
             ImGuiHelpers.ScaledDummy(8f);
 
-            if (ImGui.Button("Open Workshoppa"))
+            if (ImGui.Button("Open Workshoppa".T()))
                 WorkshoppaModule.Instance?.OpenWorkshoppa();
         }
     }
