@@ -13,7 +13,7 @@ internal sealed partial class WorkshoppaModule
     private void InteractWithFabricationStation(IGameObject fabricationStation)
     {
         InteractWithTarget(fabricationStation);
-        _continueAt = DateTime.Now.AddSeconds(0.5);
+        _continueAt = DateTime.Now.AddSeconds(0.2);
     }
 
     private void TakeItemFromQueue()
@@ -58,7 +58,7 @@ internal sealed partial class WorkshoppaModule
             && SelectSelectString("Discontinue", 2, s => s.StartsWith("Discontinue project.", StringComparison.Ordinal)))
         {
             CurrentStage = Stage.DiscontinueProject;
-            _continueAt = DateTime.Now.AddSeconds(1);
+            _continueAt = DateTime.Now.AddSeconds(0.4);
         }
     }
 

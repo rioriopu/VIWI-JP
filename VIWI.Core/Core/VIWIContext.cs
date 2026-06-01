@@ -1,6 +1,7 @@
 using Dalamud.Game.ClientState.Objects.SubKinds;
 using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
+using VIWI.UI.Windows;
 
 namespace VIWI.Core;
 
@@ -28,4 +29,5 @@ public static class VIWIContext
     public static INotificationManager NotificationManager { get; internal set; } = null!;
     public static IDtrBar DtrBar { get; internal set; } = null!;
     public static IKeyState KeyState { get; internal set; } = null!;
+    public static MainDashboardWindow DashboardWindow { get; set; } = null!;
 }

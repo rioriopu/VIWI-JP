@@ -20,9 +20,8 @@ namespace VIWI.UI.Windows
         private readonly VIWIConfig _config;
         private const string DonationUrl = "https://ko-fi.com/veralynnala";
         private ISharedImmediateTexture? _sidebarImage;
-        private bool IsUnlocked => VIWIContext.CoreConfig?.Unlocked == true;
-        private bool IsSillyUnlocked => VIWIContext.CoreConfig?.SillyMode == true;
-        private bool ShouldShowPage(IDashboardPage page) => !page.RequiresUnlock || IsUnlocked || IsSillyUnlocked;
+        private bool ShouldShowPage(IDashboardPage page) => DashboardRegistry.ShouldShowPage(page);
+        private Type? _pendingPageType;
 
         public MainDashboardWindow(VIWIConfig config)
             : base("VIWI - Vera's Integrated World Improvements##VIWI Dashboard",
@@ -50,6 +49,8 @@ namespace VIWI.UI.Windows
 
         public override void Draw()
         {
+            ApplyPendingPageSwitch();
+
             var sidebarWidth = 180f * ImGuiHelpers.GlobalScale;
 
             using (ImRaii.Child("##viwi_sidebar", new Vector2(sidebarWidth, 0), true))
@@ -284,6 +285,22 @@ namespace VIWI.UI.Windows
             }*/
 
             ImGuiHelpers.ScaledDummy(4f);
+        }
+        public void OpenToPage<T>() where T : IDashboardPage
+        {
+            IsOpen = true;
+            _pendingPageType = typeof(T);
+        }
+        private void ApplyPendingPageSwitch()
+        {
+            if (_pendingPageType == null)
+                return;
+
+            var page = DashboardRegistry.Pages.FirstOrDefault(p => p.GetType() == _pendingPageType);
+            if (page != null && ShouldShowPage(page))
+                activePage = page;
+
+            _pendingPageType = null;
         }
         private static int IsPasskeyValid(string attempt)
         {

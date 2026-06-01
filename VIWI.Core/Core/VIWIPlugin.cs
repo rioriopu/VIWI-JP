@@ -3,6 +3,7 @@ using Dalamud.IoC;
 using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
 using ECommons;
+using ECommons.Configuration;
 using VIWI.UI.Windows;
 
 namespace VIWI.Core;
@@ -32,7 +33,7 @@ public sealed class VIWIPlugin : IDalamudPlugin
     [PluginService] internal static IKeyState KeyState { get; private set; } = null!;
 
     internal readonly WindowSystem WindowSystem = new("VIWI");
-    internal MainDashboardWindow? MainWindow;
+    internal MainDashboardWindow? DashboardWindow;
 
     public VIWIPlugin(
             IDalamudPluginInterface pluginInterface,
@@ -90,8 +91,9 @@ public sealed class VIWIPlugin : IDalamudPlugin
         ECommonsMain.Init(pluginInterface, this, [Module.DalamudReflector]);
         PluginLog.Information("Core + ECommons initialized.");
 
-        MainWindow = new MainDashboardWindow(config);
-        WindowSystem.AddWindow(MainWindow);
+        DashboardWindow = new MainDashboardWindow(config);
+        VIWIContext.DashboardWindow = DashboardWindow;
+        WindowSystem.AddWindow(DashboardWindow);
         PluginInterface.UiBuilder.Draw += WindowSystem.Draw;
         PluginInterface.UiBuilder.OpenMainUi += ToggleMainUI;
         PluginInterface.UiBuilder.OpenConfigUi += ToggleMainUI;
@@ -110,10 +112,10 @@ public sealed class VIWIPlugin : IDalamudPlugin
         PluginInterface.UiBuilder.OpenMainUi -= ToggleMainUI;
         PluginInterface.UiBuilder.OpenConfigUi -= ToggleMainUI;
 
-        if (MainWindow is not null)
+        if (DashboardWindow is not null)
         {
-            WindowSystem.RemoveWindow(MainWindow);
-            MainWindow.Dispose();
+            WindowSystem.RemoveWindow(DashboardWindow);
+            DashboardWindow.Dispose();
         }
 
         ModuleManager.Dispose();
@@ -121,7 +123,7 @@ public sealed class VIWIPlugin : IDalamudPlugin
         PluginLog.Information("Core + ECommons unloaded.");
     }
 
-    private void ToggleMainUI() => MainWindow?.Toggle();
+    private void ToggleMainUI() => DashboardWindow?.Toggle();
 
     private void OnCommand(string command, string args) => ToggleMainUI();
 }

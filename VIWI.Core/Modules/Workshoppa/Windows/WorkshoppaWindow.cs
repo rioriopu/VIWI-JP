@@ -16,6 +16,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using VIWI.Core;
 using VIWI.Modules.Workshoppa.GameData;
+using VIWI.UI.Pages;
 using static VIWI.Modules.Workshoppa.WorkshoppaConfig;
 
 namespace VIWI.Modules.Workshoppa.Windows;
@@ -170,38 +171,69 @@ internal sealed class WorkshoppaWindow : Window
                 _checkInventory = !_checkInventory;
 
             ImGui.SameLine();
-            ImGui.BeginDisabled(!NearFabricationStation || _config.ItemQueue.Sum(x => x.Quantity) == 0 ||
-                                _module.CurrentStage != Stage.Stopped || !IsDiscipleOfHandOrLand);
 
-            if (ImGuiComponents.IconButtonWithText(FontAwesomeIcon.Play, "Start Crafting"))
-            {
-                State = ButtonState.Start;
-                _checkInventory = false;
-            }
-            ImGui.EndDisabled();
+            bool grindstoneEnabled = _module._configuration.Mode == WorkshoppaConfig.TurnInMode.Leveling;
+
+            bool canStartCrafting =
+                NearFabricationStation
+                && _config.ItemQueue.Sum(x => x.Quantity) > 0
+                && _module.CurrentStage == Stage.Stopped
+                && IsDiscipleOfHandOrLand;
+
             bool canLevel =
                 NearFabricationStation
                 && _module.CurrentStage == Stage.Stopped
                 && IsDiscipleOfHandOrLand
                 && _module.AnyLevelingTargetsEnabled();
 
-            ImGui.BeginDisabled(!canLevel);
-            if (ImGuiComponents.IconButtonWithText(FontAwesomeIcon.LevelUpAlt, "Level Up Classes"))
+            ImGui.BeginDisabled(grindstoneEnabled ? !canLevel : !canStartCrafting);
+
+            if (!grindstoneEnabled)
             {
-                StartLevelingConditions();
+                if (ImGuiComponents.IconButtonWithText(FontAwesomeIcon.Play, "Start Crafting"))
+                {
+                    State = ButtonState.Start;
+                    _checkInventory = false;
+                }
             }
-            ImGuiComponents.HelpMarker("SEE VIWI CONFIG - WORKSHOPPA - GRINDSTONE\n" + 
-                "**Note that clicking this will clear your QUEUE!!**\n\n" +
+            else
+            {
+                if (ImGuiComponents.IconButtonWithText(FontAwesomeIcon.LevelUpAlt, "Level Up Classes"))
+                {
+                    StartLevelingConditions();
+                    _checkInventory = false;
+                }
+            }
+
+            ImGui.EndDisabled();
+
+            if (ImGui.Checkbox("Enable Grindstone", ref grindstoneEnabled))
+            {
+                _module._configuration.Mode = grindstoneEnabled ? WorkshoppaConfig.TurnInMode.Leveling : WorkshoppaConfig.TurnInMode.Normal;
+
+                _module.SaveConfig();
+            }
+
+            ImGui.SameLine();
+
+            ImGuiComponents.HelpMarker(
+                "SEE VIWI CONFIG - WORKSHOPPA - GRINDSTONE\n" +
+                "**Note that clicking Level Up Classes will clear your QUEUE!!**\n\n" +
                 "This is an experimental leveling feature that will repeatedly start and\n" +
-                "discontinue projects while turning in Materials to level various Classes\n\n" +
+                "discontinue projects while turning in materials to level various classes.\n\n" +
                 "This only requires you to meet a minimum level to start,\n" +
                 "and is a bit costly in later levels, but takes minimal time and effort on your part.\n\n" +
                 "Note that after level 90, Workshop projects no longer grant EXP.");
 
-            ImGui.EndDisabled();
-            ShowErrorConditions();
-        }
+            ImGui.SameLine();
 
+            if (ImGuiComponents.IconButtonWithText(FontAwesomeIcon.Cog, "QuickConfig"))
+            {
+                VIWIContext.DashboardWindow.OpenToPage<WorkshoppaPage>();
+            }
+            ShowErrorConditions();
+
+        }
         if (_checkInventory)
         {
             ImGui.Separator();
@@ -614,7 +646,7 @@ internal sealed class WorkshoppaWindow : Window
     private unsafe void DrawLevelingTimeEstimate()
     {
         const int materialsPerTurnin = 55;
-        const double secondsPerSetOfThreeTurnins = 10.0;
+        const double secondsPerSetOfThreeTurnins = 7.0;
 
         InventoryManager* inventoryManager = InventoryManager.Instance();
         if (inventoryManager == null)

@@ -87,7 +87,7 @@ internal sealed partial class WorkshoppaModule
             {
                 PluginLog.Information($"Selecting ({text})");
                 addonSelectYesNo->AtkUnitBase.FireCallbackInt(0);
-                _continueAt = DateTime.Now.AddSeconds(1);
+                _continueAt = DateTime.Now.AddSeconds(1.2);
             }
             else if (CurrentStage == Stage.DiscontinueProject && _gameStrings.DiscontinueItem.IsMatch(text) && _configuration.Mode == WorkshoppaConfig.TurnInMode.Leveling)
             {
@@ -105,7 +105,7 @@ internal sealed partial class WorkshoppaModule
                 ResetLevelingProject();
                 _configuration.CurrentlyCraftedItem = null;
                 SaveConfig();
-                _continueAt = DateTime.Now.AddSeconds(1);
+                _continueAt = DateTime.Now.AddSeconds(1.2);
             }
         }
     }

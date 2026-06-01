@@ -133,17 +133,19 @@ namespace VIWI.UI.Pages
 
             var remaining = ImGui.GetContentRegionAvail().Y;
             if (remaining < 80f * ImGuiHelpers.GlobalScale)
-                remaining = 80f * ImGuiHelpers.GlobalScale;
 
+                remaining = 80f * ImGuiHelpers.GlobalScale;
             using (ImRaii.Child("##loaded_modules", new Vector2(0, remaining), true))
             {
                 var orderedModules = DashboardRegistry.Pages
-                    .Where(p => p.Category == "Modules")
+                    .Where(p => p.Category == "Modules" && DashboardRegistry.ShouldShowPage(p))
                     .OrderBy(p => p.DisplayName);
 
                 foreach (var page in orderedModules)
                 {
-                    var status = page.SupportsEnableToggle ? (page.IsEnabled ? "Enabled" : "Disabled") : "N/A";
+                    var status = page.SupportsEnableToggle
+                        ? (page.IsEnabled ? "Enabled" : "Disabled")
+                        : "N/A";
 
                     ImGui.BulletText($"{page.DisplayName} (V{page.Version}) - {status}");
                 }

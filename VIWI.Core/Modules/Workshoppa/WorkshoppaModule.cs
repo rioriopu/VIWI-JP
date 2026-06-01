@@ -350,7 +350,7 @@ internal sealed partial class WorkshoppaModule : VIWIModuleBase<WorkshoppaConfig
                 case Stage.RequestStop:
                     _externalPluginHandler.Restore();
                     _externalPluginHandler.RestoreTextAdvance();
-                    if (_configuration.Mode == TurnInMode.Normal)
+                    if (_configuration.Mode == TurnInMode.Leveling)
                     {
                         ResetLevelingRuntimeState(); 
                     }
@@ -387,6 +387,14 @@ internal sealed partial class WorkshoppaModule : VIWIModuleBase<WorkshoppaConfig
                         {
                             PluginLog.Warning($"[Workshoppa] Merge pass could not start for {_mergeItemName} (plan empty or blocked).");
                             _mergeAttempts++;
+                            if (_mergeAttempts >= MaxMergeAttempts)
+                            {
+                                ChatGui.PrintError($"[Workshoppa] Couldn't auto-merge {_mergeItemName} after {_mergeAttempts} attempts. Merge manually to continue.");
+                                ChatGui.PrintError($"[Workshoppa] Note that workshoppa does not support Lowering Quality of materials for your own safety!");
+                                CurrentStage = Stage.RequestStop;
+                                ClearMergeState();
+                                break;
+                            }
                             break;
                         }
                         PluginLog.Information($"[Workshoppa] Merge pass {_mergeAttempts}/{MaxMergeAttempts} started for {_mergeItemName}...");

@@ -52,7 +52,7 @@ internal sealed partial class WorkshoppaModule
                     }
                     else
                     {
-                        _nextWorkshopTravelStep = DateTime.Now.AddSeconds(1);
+                        _nextWorkshopTravelStep = DateTime.Now.AddSeconds(1.2);
                     }
 
                     break;

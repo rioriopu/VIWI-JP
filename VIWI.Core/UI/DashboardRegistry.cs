@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VIWI.Core;
 using VIWI.UI.Pages;
 
 namespace VIWI.UI
@@ -13,6 +14,12 @@ namespace VIWI.UI
         {
             if (!pages.Contains(page))
                 pages.Add(page);
+        }
+        public static bool ShouldShowPage(IDashboardPage page)
+        {
+            return !page.RequiresUnlock
+                || VIWIContext.CoreConfig?.Unlocked == true
+                || VIWIContext.CoreConfig?.SillyMode == true;
         }
     }
 }
