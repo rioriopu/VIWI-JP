@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<Authors>VeraNala (forked by Estell)</Authors>
-		<Version>0.5.1.0</Version>
+		<Version>0.5.2.0</Version>
 		<!-- [VIWI-JP] InternalName を本家(VIWI)と区別するため AssemblyName を VIWIJP に。
 		     これにより出力 dll が VIWIJP.dll、Dalamud上のInternalNameも VIWIJP となり本家と併存可能。 -->
 		<AssemblyName>VIWIJP</AssemblyName>
@@ -38,6 +38,15 @@
 	  </Content>
 	</ItemGroup>
 	
+	<!-- [VIWI-JP] Modules\AoEasy\ は .NET9 時代の孤立した別プロジェクト（sln未登録）。
+	     その obj/bin に残る生成 AssemblyInfo を本プロジェクトのデフォルト glob (**/*.cs) が
+	     拾うと属性重複(CS0579)でビルドが壊れる。ネスト obj/bin の .cs を除外して再発を防ぐ。
+	     本来のモジュールソース(AoEasyModule.cs 等)は引き続きコンパイル対象。 -->
+	<ItemGroup>
+		<Compile Remove="Modules\AoEasy\obj\**\*.cs" />
+		<Compile Remove="Modules\AoEasy\bin\**\*.cs" />
+	</ItemGroup>
+
 	<ItemGroup>
 		<ProjectReference Include="..\ECommons\ECommons\ECommons.csproj" />
 	</ItemGroup>
